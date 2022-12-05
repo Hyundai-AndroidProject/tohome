@@ -8,7 +8,7 @@ import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.example.hyundai_to_home.databinding.DrawlayoutBinding
+import com.example.hyundai_to_home.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 
 //, NavigationView.OnNavigationItemSelectedListener
@@ -17,10 +17,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
 
     private lateinit var drawerLayout : DrawerLayout
     private lateinit var navigationView : NavigationView
-    private  lateinit var  binding : DrawlayoutBinding          // 뷰바인딩 객체
+    private  lateinit var  binding : ActivityMainBinding          // 뷰바인딩 객체
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DrawlayoutBinding.inflate(layoutInflater)     //바인딩 객체 연결
+        binding = ActivityMainBinding.inflate(layoutInflater)     //바인딩 객체 연결
         val view = binding.root
         setContentView(view)
 
