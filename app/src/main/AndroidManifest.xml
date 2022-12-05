@@ -12,6 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Hyundai_To_Home"
         tools:targetApi="31">
+
+        <activity
+            android:name=".ReservationActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".StoreListActivity"
+            android:exported="true" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -20,7 +30,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
