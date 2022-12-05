@@ -11,7 +11,7 @@ import com.example.hyundai_to_home.db.StoreEntity
 
 class StoreListActivity : AppCompatActivity() {
 
-    private lateinit var binding:ActivityStoreListBinding
+    private lateinit var binding: ActivityStoreListBinding
 
     private lateinit var db: AppDatabase
     private lateinit var storeDao: StoreDao
@@ -23,13 +23,13 @@ class StoreListActivity : AppCompatActivity() {
         binding = ActivityStoreListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         // DB 인스턴스를 가져오고 DB작업을 할 수 있는 DAO를 가져옵니다.
         db = AppDatabase.getInstance(this)!!
         storeDao = db.StoreDao()
 
         getAllStoreList()
     }
+
     private fun getAllStoreList() {
         Thread {
             storeList = ArrayList(storeDao.getStoreAll())
@@ -40,9 +40,10 @@ class StoreListActivity : AppCompatActivity() {
     private fun setRecyclerView() {
         // 리사이클러뷰 설정
         runOnUiThread {
-            adapter = StoreRecyclerViewAdapter(storeList, this) // ❷ 어댑터 객체 할당
+            adapter = StoreRecyclerViewAdapter(storeList) // ❷ 어댑터 객체 할당
             binding.recyclerView.adapter = adapter // 리사이클러뷰 어댑터로 위에서 만든 어댑터 설정
-            binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) // 레이아웃 매니저 설정
+            binding.recyclerView.layoutManager =
+                LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) // 레이아웃 매니저 설정
         }
     }
 

@@ -8,5 +8,7 @@ import androidx.room.PrimaryKey
 data class StoreEntity (
     @PrimaryKey(autoGenerate = true) var storeId : Int? = null,
     @ColumnInfo(name="storeName") val storeName : String,
-    @ColumnInfo(name="storeContent") val storeContent : String
+    @ColumnInfo(name="storeContent") val storeContent : String,
+    @ColumnInfo(name="storeImage") val storeImage : String,
+    @ColumnInfo(name="storeDepartment") val storeDepartment : String
 )
