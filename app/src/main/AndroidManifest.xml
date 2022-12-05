@@ -22,7 +22,13 @@
             android:name=".ReservationActivity"
             android:exported="true" />
         <activity
+            android:name=".ReservationCompleteActivity"
+            android:exported="true" />
+        <activity
             android:name=".WaitingActivity"
+            android:exported="true" />
+        <activity
+            android:name=".WaitingCompleteActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
