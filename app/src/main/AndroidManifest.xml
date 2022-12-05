@@ -15,6 +15,7 @@
         android:theme="@style/Theme.Hyundai_To_Home"
         tools:targetApi="31">
 
+
         <activity
             android:name=".StoreListActivity"
             android:exported="true" />
