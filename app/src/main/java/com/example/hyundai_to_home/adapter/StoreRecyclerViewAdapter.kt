@@ -1,41 +1,61 @@
 package com.example.hyundai_to_home.adapter
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hyundai_to_home.StoreListActivity
+import com.bumptech.glide.Glide
+import com.example.hyundai_to_home.ReservationActivity
+import com.example.hyundai_to_home.WaitingActivity
 import com.example.hyundai_to_home.databinding.ItemStoreBinding
 import com.example.hyundai_to_home.db.StoreEntity
 
 class StoreRecyclerViewAdapter(
-    private val storeList: ArrayList<StoreEntity>,
-    storeListActivity: StoreListActivity
-) :
-    RecyclerView.Adapter<StoreRecyclerViewAdapter.MyViewHolder>() {
+    val storeList: ArrayList<StoreEntity>
+) : RecyclerView.Adapter<StoreRecyclerViewAdapter.Holder>() {
 
-    inner class MyViewHolder(binding: ItemStoreBinding) : RecyclerView.ViewHolder(binding.root) {
-        val storeName = binding.storeName
-        val storeContent = binding.storeContent
+    inner class Holder(
+        private val binding: ItemStoreBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        // 뷰 바인딩에서 기본적으로 제공하는 root 변수는 레이아웃의 루트 레이아웃을 의미합니다.
-        val root = binding.root
+        private val context = binding.root.context
+
+        fun bind(item: StoreEntity) {
+            binding.storeName.text = item.storeName
+            binding.storeContent.text = item.storeContent
+
+            println("image: ${item.storeImage}")
+
+            Glide.with(context)
+                .load(item.storeImage)
+                .into(binding.storeImage)
+
+            item.storeId
+            binding.btnReservation.setOnClickListener {
+                val intent = Intent(context, ReservationActivity::class.java).apply {
+                    putExtra("STORE_ID", item.storeId)
+                }
+                context.startActivity(intent)
+            }
+            binding.btnWaiting.setOnClickListener {
+                val intent = Intent(context, WaitingActivity::class.java).apply {
+                    putExtra("STORE_ID", item.storeId)
+                }
+                context.startActivity(intent)
+            }
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         // item_store.xml 바인딩 객체 생성
         val binding: ItemStoreBinding =
             ItemStoreBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyViewHolder(binding)
+        return Holder(binding)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val storeData = storeList[position]
-
-        // 식당 이름
-        holder.storeName.text = storeData.storeName.toString()
-        // 식당 정보
-        holder.storeContent.text = storeData.storeContent
-
+    override fun onBindViewHolder(holder: Holder, position: Int) {
+        holder.bind(storeList[position])
     }
 
     override fun getItemCount(): Int {

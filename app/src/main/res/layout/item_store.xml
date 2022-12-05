@@ -1,54 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/item_border"
     android:layout_width="match_parent"
-    android:layout_height="140dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:paddingVertical="8dp">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/store_image"
-        android:layout_width="60dp"
+        android:layout_width="100dp"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
-        android:background="@color/white"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="19sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:srcCompat="@tools:sample/backgrounds/scenic"/>
 
     <TextView
         android:id="@+id/store_name"
         android:layout_width="0dp"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="16dp"
         android:background="@color/white"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@id/store_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/store_image"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.145" />
+        tools:text="올댓커피"/>
 
     <TextView
         android:id="@+id/store_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="4dp"
         android:background="@color/white"
         android:textColor="@color/black"
+        android:maxLines="2"
+        android:ellipsize="end"
+        app:layout_constraintTop_toBottomOf="@id/store_name"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/store_image"
+        app:layout_constraintVertical_bias="0.471"
+        tools:text="브라질 &amp; 엘살바도르 C.O.E, 월드 바리스타 챔피언쉽 "/>
+
+    <Button
+        android:id="@+id/btnReservation"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="6dp"
+        android:text="@string/reservation"
+        app:layout_constraintTop_toBottomOf="@id/store_image"
+        app:layout_constraintStart_toStartOf="@id/store_image"
+        />
+
+    <Button
+        android:id="@+id/btnWaiting"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/waiting"
+        app:layout_constraintTop_toTopOf="@id/btnReservation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@id/store_image"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.471" />
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
