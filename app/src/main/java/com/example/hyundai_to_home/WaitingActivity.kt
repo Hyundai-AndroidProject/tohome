@@ -33,13 +33,16 @@ class WaitingActivity: AppCompatActivity(){
         storeDao = db.StoreDao()
 
         //StoreListActivity 으로부터 넘긴 데이터를 받는다. - 승하
-        getOneStore(intent.getIntExtra("store_id",0))
-        println(intent.getIntExtra("store_id",0))
+//        getOneStore(intent.getIntExtra("store_id",0))
+//        println(intent.getIntExtra("store_id",0))
 
         //intent를 사용해 다음 액티비티로 넘어가는 리스너 구현
         binding.btnWaitingComplete.setOnClickListener {
             insertWaiting()
+
             val intent = Intent(this, WaitingCompleteActivity::class.java)
+            intent.putExtra("memberId",binding.memberName.text.toString() )
+            intent.putExtra("storeId", getIntent().getIntExtra("store_id", 0))
             startActivity(intent)
         }
     }
@@ -71,6 +74,7 @@ class WaitingActivity: AppCompatActivity(){
             Log.d("waiting", wait.toString())
         } else {
             Toast.makeText(this, "모든 항목을 채워주세요.", Toast.LENGTH_SHORT).show()
+            finish()
         }
     }
 

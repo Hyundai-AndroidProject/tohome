@@ -10,6 +10,6 @@ interface WaitingDao {
     fun insertWaiting(waiting : Waiting)
 
     @Query("select * from waiting where member_id = :memberId and store_id = :storeId")
-    fun findWaitingById(memberId : String, storeId : String) : Waiting
+    fun findWaitingById(memberId : String, storeId : Int) : Waiting
 
 }
