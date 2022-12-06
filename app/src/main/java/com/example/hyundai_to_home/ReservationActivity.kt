@@ -21,7 +21,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ReservationActivity : AppCompatActivity() {
+class ReservationActivity : AppCompatActivity(), OnDayListener {
 
     lateinit var binding: ActivityReservationBinding
 
@@ -69,7 +69,7 @@ class ReservationActivity : AppCompatActivity() {
         val dayList = dayInMonthArray()
 
         // 어댑터 초기화
-        val adapter = CalendarAdapter(dayList)
+        val adapter = CalendarAdapter(dayList,this)
 
         // 레이아웃 설정 (열 7개 )
         var manager: RecyclerView.LayoutManager = GridLayoutManager(applicationContext, 7)
@@ -123,6 +123,11 @@ class ReservationActivity : AppCompatActivity() {
         var yearMonthDay = yearMonthFromDate(selectedDate) + " " + dayText + "일"
         Toast.makeText(this, yearMonthDay,Toast.LENGTH_SHORT).show()
     }*/
+
+    override fun onDayClick(dayText: String) {
+        // var yearMonthDay = monthYearFromDate(CalendarUtil.selectedDate)
+        Toast.makeText(this, dayText, Toast.LENGTH_SHORT).show()
+    }
 
     private fun getOneStore(storeNum:Int){
         Thread {

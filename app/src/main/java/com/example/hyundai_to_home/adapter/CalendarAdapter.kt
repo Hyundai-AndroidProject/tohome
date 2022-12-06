@@ -9,16 +9,18 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hyundai_to_home.R
+import com.example.hyundai_to_home.listner.OnDayListener
+
 import com.example.hyundai_to_home.util.CalendarUtil
 import java.util.Calendar
 import java.util.Date
 
-class CalendarAdapter (private val dayList : ArrayList<Date>)
+class CalendarAdapter (private val dayList : ArrayList<Date> , private val onDayListner: OnDayListener)
     : RecyclerView.Adapter <CalendarAdapter.ItemViewHolder>(){
 
-        class ItemViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-            val dayText : TextView = itemView.findViewById(R.id.dayText)
-        }
+    class ItemViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+        val dayText : TextView = itemView.findViewById(R.id.dayText)
+    }
 
     // 화면 설정
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -64,7 +66,7 @@ class CalendarAdapter (private val dayList : ArrayList<Date>)
 
             // 현재 날짜 비교해서 같다면 배경 색상 변경
             if (selectDay == dayNo) {
-                holder.itemView.setBackgroundColor(Color.DKGRAY)
+                holder.dayText.setTextColor(Color.GREEN)
             }
             // 텍스트 색상 지정 (토,일)
             if((position + 1) % 7 == 0) {
@@ -83,12 +85,15 @@ class CalendarAdapter (private val dayList : ArrayList<Date>)
             }
         }
 
-
         // 날짜 클릭 이벤트
         holder.itemView.setOnClickListener {
             // 인터페이스를 통해 날짜를 넘겨준다
-            var yearMonDay = "$iYear 년 $iMonth 월 $iDay 일"
-            Toast.makeText(holder.itemView.context, yearMonDay,Toast.LENGTH_SHORT).show()
+            /* Log.i("클릭","클릭")
+             var yearMonDay = "$iYear 년 $iMonth 월 $iDay 일 예약"
+             Toast.makeText(holder.itemView.context, yearMonDay,Toast.LENGTH_SHORT).show()
+ */
+            onDayListner.onDayClick(monthDate.toString())
+
         }
     }
 
