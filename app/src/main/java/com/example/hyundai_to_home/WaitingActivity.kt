@@ -6,20 +6,23 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.hyundai_to_home.databinding.ActivityWaitingBinding
-import com.example.hyundai_to_home.db.AppDatabase
-import com.example.hyundai_to_home.db.Waiting
-import com.example.hyundai_to_home.db.WaitingDao
-import com.example.hyundai_to_home.db.WaitingState
+import com.example.hyundai_to_home.db.*
+import kotlinx.coroutines.flow.MutableStateFlow
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class WaitingActivity: AppCompatActivity(){
     private lateinit var binding: ActivityWaitingBinding
+
     private lateinit var db : AppDatabase
+    private lateinit var storeDao: StoreDao
+    private lateinit var store: StoreEntity
+
+
     private lateinit var waitingDao :WaitingDao
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         // 뷰 바인딩
         binding = ActivityWaitingBinding.inflate(layoutInflater)
@@ -27,6 +30,11 @@ class WaitingActivity: AppCompatActivity(){
 
         db = AppDatabase.getInstance(this)!!
         waitingDao = db.waitingDao()
+        storeDao = db.StoreDao()
+
+        //StoreListActivity 으로부터 넘긴 데이터를 받는다. - 승하
+        getOneStore(intent.getIntExtra("store_id",0))
+        println(intent.getIntExtra("store_id",0))
 
         //intent를 사용해 다음 액티비티로 넘어가는 리스너 구현
         binding.btnWaitingComplete.setOnClickListener {
@@ -40,7 +48,7 @@ class WaitingActivity: AppCompatActivity(){
         var intent : Intent = getIntent()
         val memberId = binding.memberName.text.toString()
         val memberPhone =binding.memberPhone.text.toString()
-        val storeId = intent.getIntExtra("STORE_ID", 0).toString()
+        val storeId = intent.getIntExtra("store_id", 0).toString()
         val waitingCount = binding.num.text.toString()
 
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
@@ -64,6 +72,20 @@ class WaitingActivity: AppCompatActivity(){
         } else {
             Toast.makeText(this, "모든 항목을 채워주세요.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun getOneStore(storeNum:Int){
+        Thread {
+            store = storeDao.getStoreOne(storeNum)
+            //println(store)
+            runOnUiThread {
+                Glide.with(this)
+                    .load(store.storeImage)
+                    .into(binding.storeImage)
+            }
+            binding.storeName.text = store.storeName
+            binding.storeContent.text = store.storeContent
+        }.start()
     }
 
 }

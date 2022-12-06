@@ -90,6 +90,17 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/white" />
+            <Button
+                android:id="@+id/btn_mypage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#00FFFFFF"
+                android:backgroundTint="#000000"
+                android:text="마이페이지"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/white" />
         </LinearLayout>
 
         <TableLayout
@@ -320,6 +331,8 @@
             </TableRow>
 
         </TableLayout>
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

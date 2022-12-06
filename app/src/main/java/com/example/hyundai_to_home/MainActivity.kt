@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
 
         binding.reservation.setOnClickListener(this)        //웨이팅및예약 버튼 클릭 이벤트
         binding.btnLogin.setOnClickListener(this)           //로그인 화면으로 이동
+        binding.btnMypage.setOnClickListener(this)           //마이페이지 화면으로 이동
 
         //액티비티의 앱바(App Bar)로 지정
         setSupportActionBar(binding.toolbar)     //앱바 제어를 위해 툴바 액세스
@@ -56,10 +57,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
                 startActivity(intent)
             }
 
-//            R.id.btn_login -> {
-//                val intent = Intent(this, MainActivity2::class.java)
-//                startActivity(intent)
-//            }
+            R.id.btn_mypage -> {
+                val intent = Intent(this, MypageActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 

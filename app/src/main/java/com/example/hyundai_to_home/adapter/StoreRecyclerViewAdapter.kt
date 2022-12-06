@@ -39,7 +39,7 @@ class StoreRecyclerViewAdapter(
             }
             binding.btnWaiting.setOnClickListener {
                 val intent = Intent(context, WaitingActivity::class.java).apply {
-                    putExtra("store_name", item.storeName)
+                    putExtra("store_id", item.storeId)
                 }
                 context.startActivity(intent)
             }
