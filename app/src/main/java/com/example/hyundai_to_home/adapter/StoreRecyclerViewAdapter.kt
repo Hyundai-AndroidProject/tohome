@@ -31,16 +31,15 @@ class StoreRecyclerViewAdapter(
                 .load(item.storeImage)
                 .into(binding.storeImage)
 
-            item.storeId
             binding.btnReservation.setOnClickListener {
                 val intent = Intent(context, ReservationActivity::class.java).apply {
-                    putExtra("STORE_ID", item.storeId)
+                    putExtra("store_id", item.storeId)
                 }
                 context.startActivity(intent)
             }
             binding.btnWaiting.setOnClickListener {
                 val intent = Intent(context, WaitingActivity::class.java).apply {
-                    putExtra("STORE_ID", item.storeId)
+                    putExtra("store_name", item.storeName)
                 }
                 context.startActivity(intent)
             }

@@ -41,8 +41,8 @@ class StoreListActivity : AppCompatActivity() {
         // 리사이클러뷰 설정
         runOnUiThread {
             adapter = StoreRecyclerViewAdapter(storeList) // ❷ 어댑터 객체 할당
-            binding.recyclerView.adapter = adapter // 리사이클러뷰 어댑터로 위에서 만든 어댑터 설정
-            binding.recyclerView.layoutManager =
+            binding.storeRecyclerView.adapter = adapter // 리사이클러뷰 어댑터로 위에서 만든 어댑터 설정
+            binding.storeRecyclerView.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) // 레이아웃 매니저 설정
         }
     }

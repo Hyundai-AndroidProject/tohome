@@ -5,10 +5,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.hyundai_to_home.adapter.CalendarAdapter
 import com.example.hyundai_to_home.databinding.ActivityReservationBinding
+import com.example.hyundai_to_home.db.AppDatabase
+import com.example.hyundai_to_home.db.StoreDao
+import com.example.hyundai_to_home.db.StoreEntity
 import com.example.hyundai_to_home.listner.OnDayListener
 import com.example.hyundai_to_home.util.CalendarUtil
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -18,13 +24,26 @@ import kotlin.collections.ArrayList
 class ReservationActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityReservationBinding
+
+    private lateinit var db:AppDatabase
+    private lateinit var storeDao: StoreDao
+    private lateinit var store: StoreEntity
+
     // lateinit var calender: Calendar
+    private val _store = MutableStateFlow<StoreEntity?>(null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // binding 초기화
         binding = ActivityReservationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        db = AppDatabase.getInstance(this)!!
+        storeDao = db.StoreDao()
+
+        //StoreListActivity 으로부터 넘긴 데이터를 받는다. - 승하
+        getOneStore(intent.getIntExtra("store_id",0))
+        println(intent.getIntExtra("store_id",0))
 
         // 화면 설정
         setMonthView()
@@ -104,4 +123,19 @@ class ReservationActivity : AppCompatActivity() {
         var yearMonthDay = yearMonthFromDate(selectedDate) + " " + dayText + "일"
         Toast.makeText(this, yearMonthDay,Toast.LENGTH_SHORT).show()
     }*/
+
+    private fun getOneStore(storeNum:Int){
+        Thread {
+            store = storeDao.getStoreOne(storeNum)
+            println(store)
+            runOnUiThread {
+                Glide.with(this)
+                    .load(store.storeImage)
+                    .into(binding.storeImage)
+            }
+            binding.storeName.text = store.storeName
+            binding.storeContent.text = store.storeContent
+        }.start()
+    }
+
 }

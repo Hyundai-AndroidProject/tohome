@@ -9,6 +9,9 @@ interface StoreDao {
     @Query("SELECT * FROM store")
     fun getStoreAll() : List<StoreEntity>
 
+    @Query("SELECT * FROM store where storeId = :storeNum ")
+    fun getStoreOne(storeNum:Int) : StoreEntity
+
     @Insert
     fun addStoreDB(stores : List<StoreEntity>)
 }

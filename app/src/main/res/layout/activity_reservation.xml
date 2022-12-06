@@ -56,7 +56,7 @@
 
 
             <ImageView
-                android:id="@+id/img_store"
+                android:id="@+id/store_image"
                 android:layout_width="match_parent"
                 android:layout_height="700px"
                 android:layout_marginTop="2dp"
@@ -81,7 +81,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img_store" />
+                app:layout_constraintTop_toBottomOf="@+id/store_image" />
 
             <TextView
                 android:id="@+id/store_content"
