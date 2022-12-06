@@ -48,7 +48,7 @@ class WaitingActivity: AppCompatActivity(){
         var intent : Intent = getIntent()
         val memberId = binding.memberName.text.toString()
         val memberPhone =binding.memberPhone.text.toString()
-        val storeId = intent.getIntExtra("store_id", 0).toString()
+        val storeId = intent.getIntExtra("store_id", 0)
         val waitingCount = binding.num.text.toString()
 
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
