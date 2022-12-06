@@ -9,11 +9,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [StoreEntity::class],version = 1)
+@Database(entities = arrayOf(StoreEntity::class, Waiting::class),version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun StoreDao() : StoreDao
 
+    abstract fun waitingDao() : WaitingDao
     companion object {
         @Volatile
         var appDatabase : AppDatabase? = null
@@ -28,7 +29,7 @@ abstract class AppDatabase : RoomDatabase() {
             }*/
             if(appDatabase == null){
                 synchronized(AppDatabase::class){
-                    //데이터베이스 인스턴스를 생성하고 해당 인스턴스로 DAO인스턴스의 메서드를 사용하여 데이터베이스와 상호작용
+                    //데이터베이스 인스턴스를 생성하고 해당 인스턴스로 DAO인스턴스의 메서드를 사용할 수 있게된다
                     appDatabase = Room.databaseBuilder(
                         context.applicationContext,
                         AppDatabase::class.java,
