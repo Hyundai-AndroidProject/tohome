@@ -122,9 +122,19 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
         }
 
         binding.btnConfirm.setOnClickListener {
-            insertReservation()
-            val intent = Intent(this, ReservationCompleteActivity::class.java)
-            startActivity(intent)
+
+            if (binding.check1.isChecked && binding.check2.isChecked) {
+                insertReservation()
+                runOnUiThread {
+                    Toast.makeText(this, "예약이 확정되었습니다.", Toast.LENGTH_SHORT).show()
+                }
+                val intent = Intent(this, ReservationCompleteActivity::class.java)
+                intent.putExtra("memberId", binding.memberName.text.toString())
+                intent.putExtra("storeId", getIntent().getIntExtra("store_id", 0))
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "모든 항목을 채워주세요.", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }
@@ -228,27 +238,31 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
         val requestContent = binding.requestContent.text.toString()
 
         // 오늘 날짜
-        val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
         val reservationRegisterDate: String = LocalDateTime.now().format(formatter)
 
         // 예약한 날짜
         val reservationFixedDate = reservationFixedDate.toString()
         val reservationFixedTime = reservationFixedTime.toString()
-        val reservationSate = "1" // 1: 예약 확정 / 2: 예약 취소 / 3: 입장 완료
+        val reservationSate = "예약 확정" // 1: 예약 확정 / 2: 예약 취소 / 3: 입장 완료
 
-        if (binding.check1.isChecked && binding.check2.isChecked) {
-            Thread {
-                reservationDao.insertReservationDB(ReservationEntity(memberId,storeId, reservationHeadCount,requestContent,reservationRegisterDate
-                        ,reservationFixedDate,reservationFixedTime,reservationSate))
-            } .start()
-            val reservation = ReservationEntity(memberId,storeId, reservationHeadCount,requestContent,reservationRegisterDate
-                ,reservationFixedDate,reservationFixedTime,reservationSate)
-            Log.i("예약 데이터",reservation.toString())
-        } else {
-            Toast.makeText(this, "모든 항목을 채워주세요.", Toast.LENGTH_SHORT).show()
-        }
+        val reservation = ReservationEntity(
+            memberId,
+            storeId,
+            reservationHeadCount,
+            requestContent,
+            reservationRegisterDate,
+            reservationFixedDate,
+            reservationFixedTime,
+            reservationSate
+        )
+
+        Thread {
+            reservationDao.insertReservationDB(
+                reservation
+            )
+        }.start()
+
+        Log.i("예약 데이터", reservation.toString())
     }
-
-
-
 }
