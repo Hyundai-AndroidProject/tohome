@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
     private lateinit var drawerLayout : DrawerLayout
     private lateinit var navigationView : NavigationView
     private  lateinit var  binding : ActivityMainBinding          // 뷰바인딩 객체
+
+    private lateinit var MemberId : String      //임시 회원 아이디
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)     //바인딩 객체 연결
@@ -37,7 +39,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
 
         drawerLayout = binding.drawerLayout
 
+        isLogin()
 
+    }
+
+    private fun isLogin() {
+        MemberId="tlsrldnjs"
+        if(!MemberId.isBlank()){
+            binding.loginTitle.text ="환영합니다. 다양한 서비스를 이용해보세요"
+            binding.btnLogin.text = "안녕하세요"
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

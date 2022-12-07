@@ -38,12 +38,20 @@ class WaitingActivity: AppCompatActivity(){
 
         //intent를 사용해 다음 액티비티로 넘어가는 리스너 구현
         binding.btnWaitingComplete.setOnClickListener {
-            insertWaiting()
 
-            val intent = Intent(this, WaitingCompleteActivity::class.java)
-            intent.putExtra("memberId",binding.memberName.text.toString() )
-            intent.putExtra("storeId", getIntent().getIntExtra("store_id", 0))
-            startActivity(intent)
+            if(binding.check1.isChecked && binding.check2.isChecked){
+                insertWaiting()
+                runOnUiThread{
+                    Toast.makeText(this, "웨이팅예약이 확정되었습니다.", Toast.LENGTH_SHORT).show()
+                }
+                val intent = Intent(this, WaitingCompleteActivity::class.java)
+                intent.putExtra("memberId",binding.memberName.text.toString() )
+                intent.putExtra("storeId", getIntent().getIntExtra("store_id", 0))
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "모든 항목을 채워주세요.", Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
     //웨이팅 데이터 추가시 db에 저장
@@ -63,19 +71,11 @@ class WaitingActivity: AppCompatActivity(){
 //        val waitingState = WaitingState.예약완료
 
         //개인정보에 대한 체크 박스의 확인
-        if(binding.check1.isChecked && binding.check2.isChecked){
-            Thread {
-                waitingDao.insertWaiting(Waiting(null, memberId, storeId, dateAndtime, waitingNum, "예약완료"))
-                runOnUiThread{
-                    Toast.makeText(this, "웨이팅예약이 확정되었습니다.", Toast.LENGTH_SHORT).show()
-                }
-            }.start()
-            val wait = Waiting(null, memberId, storeId, dateAndtime, waitingNum, "예약완료")
-            Log.d("waiting", wait.toString())
-        } else {
-            Toast.makeText(this, "모든 항목을 채워주세요.", Toast.LENGTH_SHORT).show()
-            finish()
-        }
+        Thread {
+            waitingDao.insertWaiting(Waiting(null, memberId, storeId, dateAndtime, waitingNum, "예약완료"))
+
+        }.start()
+
     }
 
     private fun getOneStore(storeNum:Int){
