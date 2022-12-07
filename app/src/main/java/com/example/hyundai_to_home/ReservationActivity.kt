@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.hyundai_to_home.adapter.CalendarAdapter
 import com.example.hyundai_to_home.databinding.ActivityReservationBinding
+
 import com.example.hyundai_to_home.db.*
 import com.example.hyundai_to_home.listner.OnDayListener
 import com.example.hyundai_to_home.util.CalendarUtil
@@ -26,16 +27,16 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
 
     private lateinit var db: AppDatabase
     private lateinit var storeDao: StoreDao
-    private lateinit var store: StoreEntity
+    private lateinit var store: Store
 
     lateinit var reservationFixedDate: String
     lateinit var reservationFixedTime: String
 
     private lateinit var reservationDao: ReservationDao
-    private lateinit var reservation: ReservationEntity
+    private lateinit var reservation: Reservation
 
     // lateinit var calender: Calendar
-    private val _store = MutableStateFlow<StoreEntity?>(null)
+    private val _store = MutableStateFlow<Store?>(null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -233,8 +234,8 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
     private fun insertReservation() {
         var intent: Intent = getIntent()
         val memberId = binding.memberName.text.toString()
-        val storeId = intent.getIntExtra("STORE_ID", 0).toString()
-        val reservationHeadCount = Integer.parseInt(binding.num.text.toString())
+        val storeId = intent.getIntExtra("store_id", 0)
+        val reservationHeadCount = binding.num.text.toString()
         val requestContent = binding.requestContent.text.toString()
 
         // 오늘 날짜
@@ -246,7 +247,7 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
         val reservationFixedTime = reservationFixedTime.toString()
         val reservationSate = "예약 확정" // 1: 예약 확정 / 2: 예약 취소 / 3: 입장 완료
 
-        val reservation = ReservationEntity(
+        val reservation = Reservation(null,
             memberId,
             storeId,
             reservationHeadCount,

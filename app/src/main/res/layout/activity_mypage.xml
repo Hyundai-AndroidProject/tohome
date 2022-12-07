@@ -7,10 +7,14 @@
         android:id="@+id/btn_reservation_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:textColor="@color/black"
         android:text="예약 목록" />
     <Button
         android:id="@+id/btn_waiting_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:textColor="@color/black"
         android:text="웨이팅 예약 목록" />
 </LinearLayout>

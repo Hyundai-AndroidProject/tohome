@@ -1,7 +1,6 @@
 package com.example.hyundai_to_home.adapter
 
 import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,10 +8,10 @@ import com.bumptech.glide.Glide
 import com.example.hyundai_to_home.ReservationActivity
 import com.example.hyundai_to_home.WaitingActivity
 import com.example.hyundai_to_home.databinding.ItemStoreBinding
-import com.example.hyundai_to_home.db.StoreEntity
+import com.example.hyundai_to_home.db.Store
 
 class StoreRecyclerViewAdapter(
-    val storeList: ArrayList<StoreEntity>
+    val storeList: ArrayList<Store>
 ) : RecyclerView.Adapter<StoreRecyclerViewAdapter.Holder>() {
 
     inner class Holder(
@@ -21,7 +20,7 @@ class StoreRecyclerViewAdapter(
 
         private val context = binding.root.context
 
-        fun bind(item: StoreEntity) {
+        fun bind(item: Store) {
             binding.storeName.text = item.storeName
             binding.storeContent.text = item.storeContent
 
