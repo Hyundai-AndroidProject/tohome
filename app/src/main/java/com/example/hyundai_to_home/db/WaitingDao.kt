@@ -3,11 +3,16 @@ package com.example.hyundai_to_home.db
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface WaitingDao {
     @Insert
     fun insertWaiting(waiting : Waiting)
+
+    @Update
+    fun waitingCancel(waiting: Waiting)
+
 
     @Query("select * from waiting where memberId = :memberId and storeId = :storeId")
     fun findWaitingById(memberId : String, storeId : Int) : Waiting

@@ -9,6 +9,8 @@ import androidx.room.PrimaryKey
 data class Waiting(
     @PrimaryKey(autoGenerate = true) var waitingID: Int? = null,
     @ColumnInfo(name = "memberId") var memberId: String,
+    @ColumnInfo(name = "memberName") var memberName : String,
+    @ColumnInfo(name = "memberPhone") var memberPhone : String,
     @ColumnInfo(name = "storeId") var storeId: Int,
 //    @ColumnInfo(name="waiting_date") var waitingDate : String,
 //    @ColumnInfo(name = "waiting_time") var waitingTime :String,

@@ -69,8 +69,8 @@ private val STORE_DATA = arrayListOf(
 )
 
 private val WAITING_DATA = arrayListOf(
-    Waiting(1,"tmdgk95",1,"2022-12-07 13:24:30", "4", "예약완료"),
-    Waiting(2,"tmdgk95",3,"2022-12-07 14:25:35", "3", "예약완료")
+    Waiting(1,"tmdgk95","승하","010-1234-1234",1,"2022-12-07 13:24:30", "4", "예약완료"),
+    Waiting(2,"tmdgk95","승하","010-1234-1234",3,"2022-12-07 14:25:35", "3", "예약완료")
 )
 
 private val RESERVATION_DATA = arrayListOf(

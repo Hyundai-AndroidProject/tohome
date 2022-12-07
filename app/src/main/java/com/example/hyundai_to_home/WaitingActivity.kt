@@ -58,9 +58,9 @@ class WaitingActivity: AppCompatActivity(){
     private fun insertWaiting() {
         var intent : Intent = getIntent()
         val memberId = binding.memberName.text.toString()
+        val memberName = binding.memberName.text.toString();
         val memberPhone =binding.memberPhone.text.toString()
         val storeId = intent.getIntExtra("store_id", 0)
-        val waitingCount = binding.num.text.toString()
 
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
         val dateAndtime: String = LocalDateTime.now().format(formatter)
@@ -72,7 +72,7 @@ class WaitingActivity: AppCompatActivity(){
 
         //개인정보에 대한 체크 박스의 확인
         Thread {
-            waitingDao.insertWaiting(Waiting(null, memberId, storeId, dateAndtime, waitingNum, "예약완료"))
+            waitingDao.insertWaiting(Waiting(null, memberId, memberName, memberPhone, storeId, dateAndtime, waitingNum, "예약완료"))
 
         }.start()
 
