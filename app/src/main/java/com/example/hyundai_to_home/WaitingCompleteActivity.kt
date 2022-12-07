@@ -36,6 +36,7 @@ class WaitingCompleteActivity: AppCompatActivity(), View.OnClickListener {
             val waiting = waitingDao.findWaitingById(memberId, storeId)
 
             binding.waitingNumber.text = waiting.waitingID.toString()
+            binding.txtWaiting.text = "고객님 앞에 ${waiting.waitingID!! -1} 명 있습니다."
             binding.txtHeadcount.text = waiting.waitingHeadCount
             binding.txtDatetime.text = waiting.waitingDateTime
         }.start()
