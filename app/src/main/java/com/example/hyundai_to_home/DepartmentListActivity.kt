@@ -22,12 +22,8 @@ class DepartmentListActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.btn1.setOnClickListener {
-            click(0)
-        }
-        binding.btn2.setOnClickListener {
-            click(1)
-        }
+        binding.btn1.setOnClickListener { click(0) }
+        binding.btn2.setOnClickListener { click(1) }
         binding.btn3.setOnClickListener { click(2) }
         binding.btn4.setOnClickListener { click(3) }
         binding.btn5.setOnClickListener { click(4) }

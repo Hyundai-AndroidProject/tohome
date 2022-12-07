@@ -32,6 +32,10 @@ class ReservationListActivity: AppCompatActivity() {
 
         getAllReservationList()
 
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+
         /*Thread {
             store = waitingDao.getWaitingOne()
             println("store: $store")
