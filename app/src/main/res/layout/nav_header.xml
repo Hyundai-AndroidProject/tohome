@@ -10,15 +10,23 @@
         android:id="@+id/my_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text ="로그인을 해주세요"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:text ="안녕하세요"
         android:textSize="20sp"/>
 
-    <TextView
-        android:id="@+id/tv_info"
+    <Button
+        android:id="@+id/btn_mypage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="20, 남자"
-        android:textSize="14sp"/>
+        android:background="#00FFFFFF"
+
+        android:backgroundTint="#000000"
+        android:text="마이페이지"
+
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black" />
 
 </LinearLayout>

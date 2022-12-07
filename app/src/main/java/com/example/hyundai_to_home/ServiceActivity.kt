@@ -3,8 +3,10 @@ package com.example.hyundai_to_home
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -12,8 +14,8 @@ import com.example.hyundai_to_home.databinding.ActivityMainBinding
 import com.example.hyundai_to_home.databinding.ActivityServiceBinding
 import com.google.android.material.navigation.NavigationView
 
-//, NavigationView.OnNavigationItemSelectedListener
-class ServiceActivity : AppCompatActivity(), View.OnClickListener{
+//
+class ServiceActivity : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigationItemSelectedListener{
 
 
     private lateinit var drawerLayout : DrawerLayout
@@ -40,6 +42,9 @@ class ServiceActivity : AppCompatActivity(), View.OnClickListener{
 
         drawerLayout = binding.drawerLayout
 
+        navigationView = binding.navigationView
+        navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
+
         isLogin()
 
     }
@@ -52,15 +57,6 @@ class ServiceActivity : AppCompatActivity(), View.OnClickListener{
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId){
-            android.R.id.home ->{
-                drawerLayout.openDrawer(GravityCompat.START)
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
     override fun onClick(view: View?) {
         when(view?.id) {
@@ -76,10 +72,34 @@ class ServiceActivity : AppCompatActivity(), View.OnClickListener{
         }
     }
 
-//    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId){
-//        }
-//    }
+    // 툴바 메뉴 버튼이 클릭 됐을 때 실행하는 함수
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            android.R.id.home ->{
+                //메뉴 버튼 클릭시 네비게이션 드로어 열기
+                drawerLayout.openDrawer(GravityCompat.START)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            R.id.btn_mypage -> {
+                val intent = Intent(this, MypageActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.mypage -> {
+                Log.d("mypage", "dfdf")
+                val intent = Intent(this, MypageActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+        }
+        return false
+    }
 
 
 }
