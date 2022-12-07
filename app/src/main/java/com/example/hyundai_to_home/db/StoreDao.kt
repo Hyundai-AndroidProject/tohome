@@ -7,11 +7,14 @@ import androidx.room.Query
 @Dao
 interface StoreDao {
     @Query("SELECT * FROM store")
-    fun getStoreAll() : List<StoreEntity>
+    fun getStoreAll() : List<Store>
 
     @Query("SELECT * FROM store where storeId = :storeNum ")
-    fun getStoreOne(storeNum:Int) : StoreEntity
+    fun getStoreOne(storeNum:Int) : Store
+
+    @Query("SELECT * FROM store WHERE storeDepartment = :departmentName")
+    fun getStoreByDepartment(departmentName: String): List<Store>
 
     @Insert
-    fun addStoreDB(stores : List<StoreEntity>)
+    fun addStoreDB(stores : List<Store>)
 }
