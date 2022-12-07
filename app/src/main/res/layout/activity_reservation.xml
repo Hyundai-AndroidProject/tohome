@@ -307,13 +307,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="visible"
-                    >
+                    android:visibility="gone">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -336,7 +335,7 @@
 
                     <GridLayout
                         android:layout_width="match_parent"
-                        android:layout_height="650dp"
+                        android:layout_height="600dp"
                         android:layout_marginTop="10dp"
                         android:columnCount="3"
                         android:rowCount="6"
@@ -348,7 +347,7 @@
                             android:layout_columnWeight="1"
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="7dp"
-                            android:background="@color/rightgray2"
+                            android:background="@color/rightgray3"
                             android:gravity="center"
                             android:text="10:30 \n 예약마감"
                             android:textAlignment="center"
@@ -363,7 +362,7 @@
                             android:layout_marginRight="7dp"
                             android:background="@color/rightgray2"
                             android:gravity="center"
-                            android:text="10:30 \n 예약마감"
+                            android:text="11:00 \n 예약마감"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -376,7 +375,7 @@
                             android:layout_marginRight="15dp"
                             android:background="@color/rightgray2"
                             android:gravity="center"
-                            android:text="10:30 \n 예약마감"
+                            android:text="11:30 \n 예약마감"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -390,7 +389,7 @@
                             android:layout_marginRight="7dp"
                             android:background="@color/rightgray2"
                             android:gravity="center"
-                            android:text="10:30 \n 예약마감"
+                            android:text="12:00 \n 예약마감"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -404,7 +403,7 @@
                             android:layout_marginRight="7dp"
                             android:background="@color/rightgray2"
                             android:gravity="center"
-                            android:text="10:30 \n 예약마감"
+                            android:text="12:30 \n 예약마감"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -418,7 +417,7 @@
                             android:layout_marginRight="15dp"
                             android:background="@color/rightgray2"
                             android:gravity="center"
-                            android:text="10:30 \n 예약마감"
+                            android:text="13:00 \n 예약마감"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -432,7 +431,7 @@
                             android:layout_marginRight="7dp"
                             android:background="@color/rightgray2"
                             android:gravity="center"
-                            android:text="10:30 \n 예약마감"
+                            android:text="13:30 \n 예약마감"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -446,7 +445,7 @@
                             android:layout_marginRight="7dp"
                             android:background="@color/rightgray2"
                             android:gravity="center"
-                            android:text="10:30 \n 예약마감"
+                            android:text="14:00 \n 예약마감"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -460,7 +459,7 @@
                             android:layout_marginRight="15dp"
                             android:background="@color/rightgray2"
                             android:gravity="center"
-                            android:text="10:30 \n 예약마감"
+                            android:text="14:30 \n 예약마감"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -474,7 +473,7 @@
                             android:layout_marginRight="7dp"
                             android:background="@color/rightgray2"
                             android:gravity="center"
-                            android:text="10:30 \n 예약마감"
+                            android:text="15:00 \n 예약마감"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -488,7 +487,7 @@
                             android:layout_marginRight="7dp"
                             android:background="@color/rightgray2"
                             android:gravity="center"
-                            android:text="10:30 \n 예약마감"
+                            android:text="15:30 \n 예약마감"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -502,7 +501,7 @@
                             android:layout_marginRight="15dp"
                             android:background="@color/rightgray2"
                             android:gravity="center"
-                            android:text="10:30 \n 예약마감"
+                            android:text="17:30 \n 예약마감"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -516,7 +515,7 @@
                             android:layout_marginRight="7dp"
                             android:background="@color/rightgray2"
                             android:gravity="center"
-                            android:text="10:30 \n 예약마감"
+                            android:text="18:00 \n 예약마감"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -530,7 +529,7 @@
                             android:layout_marginRight="7dp"
                             android:background="@color/rightgray2"
                             android:gravity="center"
-                            android:text="10:30 \n 예약마감"
+                            android:text="18:30 \n 예약마감"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -544,7 +543,7 @@
                             android:layout_marginRight="15dp"
                             android:background="@color/rightgray2"
                             android:gravity="center"
-                            android:text="10:30 \n 예약마감"
+                            android:text="19:00 \n 예약마감"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -558,7 +557,7 @@
                             android:layout_marginRight="7dp"
                             android:background="@color/rightgray2"
                             android:gravity="center"
-                            android:text="10:30 \n 예약마감"
+                            android:text="19:30 \n 예약마감"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -572,7 +571,7 @@
                             android:layout_marginRight="7dp"
                             android:background="@color/rightgray2"
                             android:gravity="center"
-                            android:text="10:30 \n 예약마감"
+                            android:text="20:00 \n 예약마감"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -586,12 +585,13 @@
                             android:layout_marginRight="15dp"
                             android:background="@color/rightgray2"
                             android:gravity="center"
-                            android:text="10:30 \n 예약마감"
+                            android:text="20:30 \n 예약마감"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
                     </GridLayout>
+
                     <View
                         android:id="@+id/divide_line6"
                         android:layout_width="match_parent"
@@ -604,7 +604,6 @@
 
 
             </LinearLayout>
-
 
 
             <TextView
@@ -732,6 +731,45 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/info2" />
 
+            <View
+                android:id="@+id/divide_line7"
+                android:layout_width="match_parent"
+                android:layout_height="0.9dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/info3" />
+
+            <TextView
+                android:id="@+id/request_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:text="요청사항"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divide_line7" />
+
+            <EditText
+                android:id="@+id/request_content"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/request_border"
+                android:hint="    요청 사항을 남겨주세요"
+                android:textSize="17sp"
+                android:gravity="top"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/request_title"/>
+
             <CheckBox
                 android:id="@+id/allcheck"
                 android:layout_width="wrap_content"
@@ -742,7 +780,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/info3" />
+                app:layout_constraintTop_toBottomOf="@+id/request_content" />
 
             <CheckBox
                 android:id="@+id/check1"
@@ -766,6 +804,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/check1" />
 
             <Button
+                android:id="@+id/btn_confirm"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"

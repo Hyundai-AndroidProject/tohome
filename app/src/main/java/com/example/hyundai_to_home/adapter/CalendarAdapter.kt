@@ -88,11 +88,11 @@ class CalendarAdapter (private val dayList : ArrayList<Date> , private val onDay
         // 날짜 클릭 이벤트
         holder.itemView.setOnClickListener {
             // 인터페이스를 통해 날짜를 넘겨준다
-            /* Log.i("클릭","클릭")
-             var yearMonDay = "$iYear 년 $iMonth 월 $iDay 일 예약"
+            Log.i("클릭","클릭")
+             var yearMonDay = "$iYear.$iMonth.$iDay"
              Toast.makeText(holder.itemView.context, yearMonDay,Toast.LENGTH_SHORT).show()
- */
-            onDayListner.onDayClick(monthDate.toString())
+
+            onDayListner.onDayClick(yearMonDay)
 
         }
     }

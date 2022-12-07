@@ -10,6 +10,5 @@ interface ReservationDao {
     fun getReservationAll() : List<ReservationEntity>
 
     @Insert
-    fun addReservationDB(reservation:ReservationEntity)
-
+    fun insertReservationDB(reservation:ReservationEntity)
 }

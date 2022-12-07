@@ -9,12 +9,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = arrayOf(StoreEntity::class, Waiting::class),version = 1)
+@Database(entities = arrayOf(StoreEntity::class, Waiting::class, ReservationEntity::class),version = 2)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun StoreDao() : StoreDao
-
     abstract fun waitingDao() : WaitingDao
+    abstract fun ReservationDao() : ReservationDao
+
     companion object {
         @Volatile
         var appDatabase : AppDatabase? = null
