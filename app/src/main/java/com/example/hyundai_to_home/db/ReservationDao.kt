@@ -19,4 +19,6 @@ interface ReservationDao {
     @Query("SELECT s.* from store s, reservation r where r.storeId=s.storeId and r.reservationId =:reservationId")
     fun getReservationOne(reservationId : String): Store?
 
+    @Query("SELECT COUNT(memberID) from reservation where  storeId =:storeId and reservationFixedTime =:reservationFixedTime")
+    fun countReservation(storeId : Int, reservationFixedTime : String): Int
 }

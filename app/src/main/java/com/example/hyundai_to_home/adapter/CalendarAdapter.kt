@@ -18,6 +18,8 @@ import java.util.Date
 class CalendarAdapter (private val dayList : ArrayList<Date> , private val onDayListner: OnDayListener)
     : RecyclerView.Adapter <CalendarAdapter.ItemViewHolder>(){
 
+    private var selectdate = -1
+
     class ItemViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         val dayText : TextView = itemView.findViewById(R.id.dayText)
     }
@@ -34,6 +36,7 @@ class CalendarAdapter (private val dayList : ArrayList<Date> , private val onDay
     // 데이터 설정
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
 
+        var position = position
         // 날짜 변수에 담기
         var monthDate = dayList[holder.adapterPosition]
 
@@ -85,15 +88,28 @@ class CalendarAdapter (private val dayList : ArrayList<Date> , private val onDay
             }
         }
 
+        if (selectdate == position) {
+            holder.itemView.setBackgroundColor(Color.parseColor("#BC8F8F"))
+        } else {
+            holder.itemView.setBackgroundColor(Color.WHITE)
+        }
         // 날짜 클릭 이벤트
         holder.itemView.setOnClickListener {
             // 인터페이스를 통해 날짜를 넘겨준다
             Log.i("클릭","클릭")
-             var yearMonDay = "$iYear.$iMonth.$iDay"
-             Toast.makeText(holder.itemView.context, yearMonDay,Toast.LENGTH_SHORT).show()
+             var yearMonDay = "$iYear-$iMonth-$iDay"
+             //Toast.makeText(holder.itemView.context, yearMonDay,Toast.LENGTH_SHORT).show()
 
+            // 현재 선택된 position과 이전에 선택된 position을 가져온다
+            var beforeDate = selectdate
+            selectdate = position
+
+            // notifyitemchanged의 이전 date와 현재 date를 줌으로써 해당 항목의 레이아웃을 다시 생성
+            notifyItemChanged(beforeDate)
+            notifyItemChanged(selectdate)
+
+            holder.itemView.setBackgroundColor(Color.parseColor("#BC8F8F"))
             onDayListner.onDayClick(yearMonDay)
-
         }
     }
 

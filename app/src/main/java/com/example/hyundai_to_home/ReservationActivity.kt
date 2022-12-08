@@ -1,9 +1,11 @@
 package com.example.hyundai_to_home
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -11,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.hyundai_to_home.adapter.CalendarAdapter
 import com.example.hyundai_to_home.databinding.ActivityReservationBinding
-
 import com.example.hyundai_to_home.db.*
 import com.example.hyundai_to_home.listner.OnDayListener
 import com.example.hyundai_to_home.util.CalendarUtil
@@ -20,6 +21,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.properties.Delegates
 
 class ReservationActivity : AppCompatActivity(), OnDayListener {
 
@@ -31,6 +33,8 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
 
     lateinit var reservationFixedDate: String
     lateinit var reservationFixedTime: String
+    var pnum: Int = 1
+
 
     private lateinit var reservationDao: ReservationDao
     private lateinit var reservation: Reservation
@@ -54,6 +58,25 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
 
         // 화면 설정
         setMonthView()
+        var times = arrayOf(binding.view1, binding.view2, binding.view3, binding.view4, binding.view5)
+        // 시간 설정
+        val storeId = intent.getIntExtra("store_id", 0)
+
+        for (a in 0..times.size-1) {
+            var num: Int = 0
+            Thread {
+                num = reservationDao.countReservation(storeId, times[a].text.toString())
+            }.start()
+            Log.i("시간 인원",num.toString())
+            if (num > 1) {
+                times[a].setText("예약 마감")
+            }
+        }
+
+        // 뒤로가기 버튼
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
 
         // 이전달 버튼 이벤트
         binding.btnPre.setOnClickListener {
@@ -67,60 +90,102 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
             setMonthView()
         }
 
+        // 인원수 변경 버튼
+        binding.icMinus.setOnClickListener {
+            minus()
+        }
+
+        binding.icPlus.setOnClickListener {
+            plus()
+        }
+
+
+        var count = 0
+        var beforeselect = 0
+
         binding.view1.setOnClickListener {
+            // binding.view1.setTextColor(Color.BLACK)
+            times[beforeselect].setBackgroundColor(Color.parseColor("#DFDDDC"))
+            binding.view1.setBackgroundColor(Color.parseColor("#BC8F8F"))
+            beforeselect = 0
             reservationFixedTime = "10:30"
+
+
         }
         binding.view2.setOnClickListener {
+            times[beforeselect].setBackgroundColor(Color.parseColor("#DFDDDC"))
+            binding.view2.setBackgroundColor(Color.parseColor("#BC8F8F"))
+            beforeselect = 1
             reservationFixedTime = "11:00"
         }
         binding.view3.setOnClickListener {
+            times[beforeselect].setBackgroundColor(Color.parseColor("#DFDDDC"))
+            binding.view3.setBackgroundColor(Color.parseColor("#BC8F8F"))
+            beforeselect = 2
             reservationFixedTime = "11:30"
+
         }
-        binding.view1.setOnClickListener {
+        binding.view4.setOnClickListener {
+            times[beforeselect].setBackgroundColor(Color.parseColor("#DFDDDC"))
+            binding.view4.setBackgroundColor(Color.parseColor("#BC8F8F"))
+            beforeselect = 3
             reservationFixedTime = "12:00"
+
         }
-        binding.view1.setOnClickListener {
-            reservationFixedTime = "12:30"
+        binding.view5.setOnClickListener {
+            if (count < 2) {
+                binding.view5.setTextColor(Color.BLACK)
+                binding.view5.setBackgroundColor(Color.GREEN)
+                reservationFixedTime = "12:30"
+                count++
+            }
         }
-        binding.view1.setOnClickListener {
-            reservationFixedTime = "13:00"
+        binding.view6.setOnClickListener {
+            if (count < 2) {
+                binding.view6.setTextColor(Color.BLACK)
+                binding.view6.setBackgroundColor(Color.GREEN)
+                reservationFixedTime = "13:00"
+                count++
+            }
         }
-        binding.view1.setOnClickListener {
-            reservationFixedTime = "13:30"
-        }
-        binding.view1.setOnClickListener {
-            reservationFixedTime = "14:00"
-        }
-        binding.view1.setOnClickListener {
-            reservationFixedTime = "14:30"
-        }
-        binding.view1.setOnClickListener {
-            reservationFixedTime = "15:00"
-        }
-        binding.view1.setOnClickListener {
-            reservationFixedTime = "15:30"
-        }
-        binding.view1.setOnClickListener {
-            reservationFixedTime = "17:30"
-        }
-        binding.view1.setOnClickListener {
-            reservationFixedTime = "18:00"
-        }
-        binding.view1.setOnClickListener {
-            reservationFixedTime = "18:30"
-        }
-        binding.view1.setOnClickListener {
-            reservationFixedTime = "19:00"
-        }
-        binding.view1.setOnClickListener {
-            reservationFixedTime = "19:30"
-        }
-        binding.view1.setOnClickListener {
-            reservationFixedTime = "20:00"
-        }
-        binding.view1.setOnClickListener {
-            reservationFixedTime = "20:30"
-        }
+
+
+        /* binding.view1.setOnClickListener {
+             reservationFixedTime = "13:30"
+         }
+         binding.view1.setOnClickListener {
+             reservationFixedTime = "14:00"
+         }
+         binding.view1.setOnClickListener {
+             reservationFixedTime = "14:30"
+         }
+         binding.view1.setOnClickListener {
+             reservationFixedTime = "15:00"
+         }
+         binding.view1.setOnClickListener {
+             reservationFixedTime = "15:30"
+         }
+         binding.view1.setOnClickListener {
+             reservationFixedTime = "17:30"
+         }
+         binding.view1.setOnClickListener {
+             reservationFixedTime = "18:00"
+         }
+         binding.view1.setOnClickListener {
+             reservationFixedTime = "18:30"
+         }
+         binding.view1.setOnClickListener {
+             reservationFixedTime = "19:00"
+         }
+         binding.view1.setOnClickListener {
+             reservationFixedTime = "19:30"
+         }
+         binding.view1.setOnClickListener {
+             reservationFixedTime = "20:00"
+         }
+         binding.view1.setOnClickListener {
+             reservationFixedTime = "20:30"
+         }*/
 
         binding.btnConfirm.setOnClickListener {
 
@@ -138,6 +203,20 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
             }
         }
 
+    }
+
+    private fun minus() {
+        var pnum = Integer.parseInt(binding.num.text.toString())
+        if (pnum - 1 > 0) {
+            var tmp = pnum - 1
+            binding.num.text = tmp.toString()
+        }
+    }
+
+    private fun plus() {
+        var pnum = Integer.parseInt(binding.num.text.toString())
+        var tmp = pnum + 1
+        binding.num.text = tmp.toString()
     }
 
     // 날짜 화면에 보여주기
@@ -247,7 +326,8 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
         val reservationFixedTime = reservationFixedTime.toString()
         val reservationSate = "예약 확정" // 1: 예약 확정 / 2: 예약 취소 / 3: 입장 완료
 
-        val reservation = Reservation(null,
+        val reservation = Reservation(
+            null,
             memberId,
             storeId,
             reservationHeadCount,
@@ -266,4 +346,20 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
 
         Log.i("예약 데이터", reservation.toString())
     }
+
+    // 시간을 입력 받아서 text 변경
+/*    private fun setTime(times : Array<Binding>) {
+        val storeId = intent.getIntExtra("store_id", 0)
+
+
+        for (a in 0..times.size) {
+            var num: Int = 0
+            Thread {
+                num = reservationDao.countReservation(storeId, times[a].text.toString())
+            }.start()
+            if (num > 1) {
+                times[a].setText("예약 마감")
+            }
+        }
+    }*/
 }

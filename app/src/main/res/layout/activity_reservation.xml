@@ -307,7 +307,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -349,10 +349,12 @@
                             android:layout_marginRight="7dp"
                             android:background="@color/rightgray3"
                             android:gravity="center"
-                            android:text="10:30 \n 예약마감"
+                            android:text="10:30"
                             android:textAlignment="center"
                             android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            />
+
 
                         <TextView
                             android:id="@+id/view2"
@@ -362,7 +364,7 @@
                             android:layout_marginRight="7dp"
                             android:background="@color/rightgray2"
                             android:gravity="center"
-                            android:text="11:00 \n 예약마감"
+                            android:text="11:00"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -375,7 +377,7 @@
                             android:layout_marginRight="15dp"
                             android:background="@color/rightgray2"
                             android:gravity="center"
-                            android:text="11:30 \n 예약마감"
+                            android:text="11:30"
                             android:textAlignment="center"
                             android:textSize="18sp"
                             android:textStyle="bold" />
