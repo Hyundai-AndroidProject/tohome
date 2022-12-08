@@ -31,10 +31,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
     override fun onClick(view: View?) {
         when(view?.id) {
             R.id.btn_main -> {
-                val intent = Intent(this, ServiceActivity::class.java)
+                val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
             }
         }
     }
-
+    override fun onBackPressed() {
+        finish()
+        //super.onBackPressed()
+    }
 }

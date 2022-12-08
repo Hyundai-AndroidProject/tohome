@@ -13,6 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.hyundai_to_home.databinding.ActivityMainBinding
 import com.example.hyundai_to_home.databinding.ActivityServiceBinding
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 //
 class ServiceActivity : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigationItemSelectedListener{
@@ -45,6 +46,7 @@ class ServiceActivity : AppCompatActivity(), View.OnClickListener, NavigationVie
         navigationView = binding.navigationView
         navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
 
+
         isLogin()
 
     }
@@ -54,6 +56,8 @@ class ServiceActivity : AppCompatActivity(), View.OnClickListener, NavigationVie
         if(!MemberId.isBlank()){
             binding.loginTitle.text ="환영합니다. 다양한 서비스를 이용해보세요"
             binding.btnLogin.text = "안녕하세요"
+            println(MyApplication.email)
+            println(FirebaseAuth.getInstance().currentUser)
         }
     }
 
@@ -99,6 +103,10 @@ class ServiceActivity : AppCompatActivity(), View.OnClickListener, NavigationVie
             }
         }
         return false
+    }
+
+    override fun onBackPressed() {
+        //super.onBackPressed()
     }
 
 

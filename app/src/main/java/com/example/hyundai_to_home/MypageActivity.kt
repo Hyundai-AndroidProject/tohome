@@ -1,10 +1,14 @@
 package com.example.hyundai_to_home
 
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hyundai_to_home.databinding.ActivityMypageBinding
+import com.google.firebase.auth.FirebaseAuth
 
 
 class MypageActivity: AppCompatActivity() {
@@ -29,5 +33,33 @@ class MypageActivity: AppCompatActivity() {
             val intent = Intent(this, WaitingListActivity::class.java)
             startActivity(intent)
         }
+
+        binding.logout.setOnClickListener{
+            MyApplication.auth.signOut()
+            finish()
+            val intent = Intent(this,LoginActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.delete.setOnClickListener{
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("주의!")
+            builder.setMessage("진짜 삭제할거야? 진짜?")
+            builder.setNegativeButton("응") { dialogInterface: DialogInterface, i: Int ->
+                MyApplication.auth.currentUser?.delete()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            }
+            builder.setPositiveButton("아니") { dialogInterface: DialogInterface, i: Int ->
+                
+            }
+
+            builder.show()
+
+        }
+
+
+        println(MyApplication.email)
     }
+
 }
