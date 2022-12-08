@@ -10,6 +10,14 @@ import com.example.hyundai_to_home.databinding.ItemWaitingBinding
 import com.example.hyundai_to_home.db.Store
 import com.example.hyundai_to_home.db.Waiting
 
+/**
+ * Serialize 기능을 사용하여 file에 object 저장?
+ * 해당 클래스에 대한 기능과 용도를 적어줍니다.
+ *
+ * @author
+ *
+ */
+
 class WaitingRecyclerViewAdapter(
     val waitingList: ArrayList<Store>, val waiting : ArrayList<Waiting>
 ) : RecyclerView.Adapter<WaitingRecyclerViewAdapter.Holder>() {
@@ -19,7 +27,13 @@ class WaitingRecyclerViewAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private val context = binding.root.context
-
+        /**
+         * 메서드의 기능을 설명 중이다.. 간략하게 적을 것.
+         *
+         * @ param int a 메서드의 파라미터 설명
+         * @ return 반환하는 것 설명
+         * @ exception 예외사항
+         */
         fun bind(item: Store) {
             binding.storeName.text = item.storeName
 

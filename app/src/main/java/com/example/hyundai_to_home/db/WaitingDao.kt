@@ -20,12 +20,15 @@ interface WaitingDao {
     @Insert
     fun addWaitingDB(waiting : List<Waiting>)
 
-    @Query("SELECT s.* from store s, waiting w where w.storeId=s.storeId")
-    fun getWaitingAll() : List<Store>
+    @Query("SELECT s.* from store s, waiting w where w.storeId=s.storeId and w.memberId = :memberId")
+    fun getWaitingAll(memberId: String) : List<Store>
 
-    @Query("SELECT w.* from store s, waiting w where w.storeId=s.storeId")
-    fun getWaiting() : List<Waiting>
+    @Query("SELECT w.* from store s, waiting w where w.storeId=s.storeId and w.memberId = :memberId")
+    fun getWaiting(memberId: String) : List<Waiting>
 
     @Query("SELECT w.* from store s, waiting w where w.storeId=s.storeId and w.storeId =:storeId")
     fun getWaitingOne(storeId : Int): Waiting?
+
+    @Query("select count(*) from waiting where storeId = :storeId")
+    fun waitingSameStore(storeId: Int) : Int
 }

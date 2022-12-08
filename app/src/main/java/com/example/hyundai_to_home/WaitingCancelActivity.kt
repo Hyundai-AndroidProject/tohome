@@ -27,13 +27,18 @@ class WaitingCancelActivity : AppCompatActivity() {
         val storeId = getintent.getIntExtra("storeId", 0)
 
         waitingCancelDetail(memberId, storeId)
+
+        binding.btnOrderList.setOnClickListener {
+            val intent = Intent(this, WaitingListActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun waitingCancelDetail(memberId: String, storeId: Int) {
         Thread {
             val waiting = waitingDao.findWaitingById(memberId, storeId)
 
-            binding.waitingNumber.text = waiting.waitingID.toString()
+            binding.waitingNumber.text = waitingDao.waitingSameStore(storeId).toString()
             binding.txtHeadcount.text = waiting.waitingHeadCount
             binding.txtDatetime.text = waiting.waitingDateTime
         }.start()

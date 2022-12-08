@@ -2,6 +2,7 @@ package com.example.hyundai_to_home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 
@@ -29,18 +30,19 @@ class WaitingCompleteActivity : AppCompatActivity(), View.OnClickListener {
         val getintent: Intent = getIntent()
         val memberId = getintent.getStringExtra("memberId")!!
         val storeId = getintent.getIntExtra("storeId", 0)
-
+        Log.d("com", memberId)
         waitingDetail(memberId, storeId)
 
         binding.btnCancel.setOnClickListener(this)
+        binding.btnOrderList.setOnClickListener(this)
     }
 
     private fun waitingDetail(memberId: String, storeId: Int) {
         Thread {
             val waiting = waitingDao.findWaitingById(memberId, storeId)
-
-            binding.waitingNumber.text = waiting.waitingID.toString()
-            binding.txtWaiting.text = "고객님 앞에 ${waiting.waitingID!! - 1} 명 있습니다."
+            var waitingNumber = waitingDao.waitingSameStore(storeId)
+            binding.waitingNumber.text = waitingNumber.toString()
+            binding.txtWaiting.text = "고객님 앞에 ${waitingNumber!! - 1} 명 있습니다."
             binding.txtHeadcount.text = waiting.waitingHeadCount
             binding.txtDatetime.text = waiting.waitingDateTime
         }.start()
@@ -66,6 +68,10 @@ class WaitingCompleteActivity : AppCompatActivity(), View.OnClickListener {
                 val intent = Intent(this, WaitingCancelActivity::class.java)
                 intent.putExtra("memberId", memberId)
                 intent.putExtra("storeId", storeId)
+                startActivity(intent)
+            }
+            R.id.btn_order_list -> {
+                val intent = Intent(this, WaitingListActivity::class.java)
                 startActivity(intent)
             }
         }

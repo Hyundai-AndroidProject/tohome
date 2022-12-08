@@ -30,7 +30,7 @@ class WaitingListActivity: AppCompatActivity() {
         // DB 인스턴스를 가져오고 DB작업을 할 수 있는 DAO를 가져옵니다.
         db = AppDatabase.getInstance(this)!!
         waitingDao = db.waitingDao()
-
+        binding.userName.text = MyApplication.email
         getAllWaitingList()
 
         binding.btnBack.setOnClickListener {
@@ -44,9 +44,10 @@ class WaitingListActivity: AppCompatActivity() {
     }
 
     private fun getAllWaitingList() {
+        val memberId = MyApplication.email!!
         Thread {
-                storeList = ArrayList(waitingDao.getWaitingAll())
-            waitingList = ArrayList(waitingDao.getWaiting())
+            storeList = ArrayList(waitingDao.getWaitingAll(memberId))
+            waitingList = ArrayList(waitingDao.getWaiting(memberId))
             setRecyclerView()
         }.start()
     }
