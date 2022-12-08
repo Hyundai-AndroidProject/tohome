@@ -32,7 +32,6 @@ class ServiceActivity : AppCompatActivity(), View.OnClickListener, NavigationVie
 
         binding.reservation.setOnClickListener(this)        //웨이팅및예약 버튼 클릭 이벤트
         binding.btnLogin.setOnClickListener(this)           //로그인 화면으로 이동
-        binding.btnMypage.setOnClickListener(this)           //마이페이지 화면으로 이동
 
         //액티비티의 앱바(App Bar)로 지정
         setSupportActionBar(binding.toolbar)     //앱바 제어를 위해 툴바 액세스
@@ -47,19 +46,11 @@ class ServiceActivity : AppCompatActivity(), View.OnClickListener, NavigationVie
         navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
 
 
-        isLogin()
+        binding.loginTitle.text ="${MyApplication.email}님 환영합니다."
+        binding.btnLogin.text = "다양한 서비스를 이용해보세요"
 
     }
 
-    private fun isLogin() {
-        MemberId="tlsrldnjs"
-        if(!MemberId.isBlank()){
-            binding.loginTitle.text ="환영합니다. 다양한 서비스를 이용해보세요"
-            binding.btnLogin.text = "안녕하세요"
-            println(MyApplication.email)
-            println(FirebaseAuth.getInstance().currentUser)
-        }
-    }
 
 
     override fun onClick(view: View?) {

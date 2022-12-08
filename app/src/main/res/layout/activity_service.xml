@@ -42,10 +42,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_vertical"
-                android:text="로그인 후 다양한 혜택을 경험하시길 바랍니다"
                 android:layout_marginTop="10dp"
-                android:textSize="16sp"
-                android:textColor="@color/white" />
+                android:text="환영합니다. 다양한 서비스를 이용해보세요"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/btn_login"
@@ -56,17 +56,6 @@
 
                 android:backgroundTint="#000000"
                 android:text="로그인"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/white" />
-            <Button
-                android:id="@+id/btn_mypage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="#00FFFFFF"
-                android:backgroundTint="#000000"
-                android:text="마이페이지"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/white" />

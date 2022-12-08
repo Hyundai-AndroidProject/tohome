@@ -34,20 +34,43 @@ class WaitingActivity: AppCompatActivity(){
 
         //StoreListActivity 으로부터 넘긴 데이터를 받는다. - 승하
         getOneStore(intent.getIntExtra("store_id",0))
-        println(intent.getIntExtra("store_id",0))
+//        println(intent.getIntExtra("store_id",0))
+
+        binding.icMinus.setOnClickListener {
+            minus()
+        }
+
+        binding.icPlus.setOnClickListener {
+            plus()
+        }
 
         //intent를 사용해 다음 액티비티로 넘어가는 리스너 구현
         binding.btnWaitingComplete.setOnClickListener {
 
             if(binding.check1.isChecked && binding.check2.isChecked){
-                insertWaiting()
-                runOnUiThread{
-                    Toast.makeText(this, "웨이팅예약이 확정되었습니다.", Toast.LENGTH_SHORT).show()
-                }
-                val intent = Intent(this, WaitingCompleteActivity::class.java)
-                intent.putExtra("memberId",binding.memberName.text.toString() )
-                intent.putExtra("storeId", getIntent().getIntExtra("store_id", 0))
-                startActivity(intent)
+                val memberId = MyApplication.email!!
+                val storeId = getIntent().getIntExtra("store_id", 0)
+                Thread{
+                    Log.d("waiting", (waitingDao.findWaitingById(memberId, storeId )!=null).toString())
+                    if(waitingDao.findWaitingById(memberId, storeId )!= null){
+                        runOnUiThread{
+                            Toast.makeText(this, "이미 해당 식당에 웨이팅하셨습니다.", Toast.LENGTH_SHORT).show()
+                        }
+                        finish()
+                    }else{
+                        insertWaiting()
+                        runOnUiThread{
+                            Toast.makeText(this, "웨이팅예약이 확정되었습니다.", Toast.LENGTH_SHORT).show()
+                        }
+                        val intent = Intent(this, WaitingCompleteActivity::class.java)
+                        intent.putExtra("memberId",memberId)
+                        intent.putExtra("storeId", storeId)
+                        startActivity(intent)
+                    }
+                }.start()
+                
+
+
             } else {
                 Toast.makeText(this, "모든 항목을 채워주세요.", Toast.LENGTH_SHORT).show()
             }
@@ -57,7 +80,7 @@ class WaitingActivity: AppCompatActivity(){
     //웨이팅 데이터 추가시 db에 저장
     private fun insertWaiting() {
         var intent : Intent = getIntent()
-        val memberId = binding.memberName.text.toString()
+        val memberId = MyApplication.email!!
         val memberName = binding.memberName.text.toString();
         val memberPhone =binding.memberPhone.text.toString()
         val storeId = intent.getIntExtra("store_id", 0)
@@ -90,6 +113,20 @@ class WaitingActivity: AppCompatActivity(){
             binding.storeName.text = store.storeName
             binding.storeContent.text = store.storeContent
         }.start()
+    }
+
+    private fun minus() {
+        var pnum = Integer.parseInt(binding.num.text.toString())
+        if (pnum - 1 > 0) {
+            var tmp = pnum - 1
+            binding.num.text = tmp.toString()
+        }
+    }
+
+    private fun plus() {
+        var pnum = Integer.parseInt(binding.num.text.toString())
+        var tmp = pnum + 1
+        binding.num.text = tmp.toString()
     }
 
 }
