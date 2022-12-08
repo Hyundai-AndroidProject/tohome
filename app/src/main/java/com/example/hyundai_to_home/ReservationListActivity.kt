@@ -1,13 +1,17 @@
 package com.example.hyundai_to_home
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hyundai_to_home.adapter.ReservationRecyclerViewAdapter
 import com.example.hyundai_to_home.databinding.ActivityReservationListBinding
 import com.example.hyundai_to_home.db.*
+import com.example.hyundai_to_home.listner.OnClickListener
 
-class ReservationListActivity: AppCompatActivity() {
+class ReservationListActivity: AppCompatActivity(), OnClickListener {
+
 
     private lateinit var binding: ActivityReservationListBinding
 
@@ -22,6 +26,7 @@ class ReservationListActivity: AppCompatActivity() {
     private var store: Store? = null
     override fun onCreate(savedInstanceState: Bundle?) {
 
+        MyApplication.email
         super.onCreate(savedInstanceState)
         // 뷰 바인딩
         binding = ActivityReservationListBinding.inflate(layoutInflater)
@@ -30,16 +35,13 @@ class ReservationListActivity: AppCompatActivity() {
         db = AppDatabase.getInstance(this)!!
         reservationDao = db.ReservationDao()
 
+        val memberId = MyApplication.email
+
         getAllReservationList()
 
         binding.btnBack.setOnClickListener {
             finish()
         }
-
-        /*Thread {
-            store = waitingDao.getWaitingOne()
-            println("store: $store")
-        }.start()*/
     }
 
     private fun getAllReservationList() {
@@ -52,7 +54,7 @@ class ReservationListActivity: AppCompatActivity() {
     private fun setRecyclerView() {
         // 리사이클러뷰 설정
         runOnUiThread {
-            adapter = ReservationRecyclerViewAdapter(storeList) // ❷ 어댑터 객체 할당
+            adapter = ReservationRecyclerViewAdapter(storeList, this) // ❷ 어댑터 객체 할당
             binding.reservationRecyclerView.adapter = adapter // 리사이클러뷰 어댑터로 위에서 만든 어댑터 설정
             binding.reservationRecyclerView.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) // 레이아웃 매니저 설정
@@ -62,6 +64,15 @@ class ReservationListActivity: AppCompatActivity() {
     override fun onRestart() {
         super.onRestart()
         getAllReservationList()
+    }
+
+    override fun OnReservationClick(storeId: Int) {
+        Log.i("storeid 넘기기",storeId.toString())
+        val intent = Intent(this, ReservationCompleteActivity::class.java)
+        // intent.putExtra("memberId", "로그인한 memberId")
+        intent.putExtra("memberPhone", getIntent().getIntExtra("memberPhone", 0))
+        intent.putExtra("storeId", storeId)
+        startActivity(intent)
     }
 }
 

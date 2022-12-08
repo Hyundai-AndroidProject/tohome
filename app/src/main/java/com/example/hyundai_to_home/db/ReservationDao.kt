@@ -22,6 +22,10 @@ interface ReservationDao {
     @Query("SELECT count(*) from reservation where storeId =:storeId and reservationFixedTime =:reservationFixedTime and reservationSate =:reservationSate and reservationFixedDate =:reservationFixedDate")
     fun countReservation(storeId : Int, reservationFixedTime : String, reservationSate : String, reservationFixedDate : String) : Int
 
-}
+    // 예약 상세
+    @Query("SELECT r.* from reservation r where memberId = :memberId and storeId = :storeId")
+    fun findReservationById(memberId : String, storeId : Int) : Reservation
 
-// SELECT COUNT(*) from reservation where  storeId =:storeId and reservationFixedTime =:reservationFixedTime
+    @Query("UPDATE reservation SET reservationSate =:reservationSate WHERE memberId = :memberId and storeId = :storeId")
+    fun cancelReservationById(memberId : String, storeId : Int, reservationSate : String): Int
+}

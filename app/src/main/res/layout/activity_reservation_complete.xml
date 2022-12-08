@@ -136,6 +136,7 @@
             app:layout_constraintTop_toBottomOf="@+id/store_name" />
 
         <TextView
+            android:id="@+id/store_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="1dp"
@@ -391,14 +392,35 @@
             app:layout_constraintTop_toBottomOf="@+id/reservation_member_phone_info" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
-        android:backgroundTint="@color/black"
-        android:text="주문목록"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/constraint4" />
+        app:layout_constraintTop_toBottomOf="@+id/constraint4">
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/btn_store_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:backgroundTint="@color/black"
+            android:text="주문목록"
+             />
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/btn_reservation_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:backgroundTint="@color/black"
+            android:text="예약취소"
+            />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

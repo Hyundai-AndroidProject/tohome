@@ -142,7 +142,8 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
                     Toast.makeText(this, "예약이 확정되었습니다.", Toast.LENGTH_SHORT).show()
                 }
                 val intent = Intent(this, ReservationCompleteActivity::class.java)
-                intent.putExtra("memberId", binding.memberName.text.toString())
+                // intent.putExtra("memberId", binding.memberName.text.toString())
+                intent.putExtra("memberPhone", binding.memberPhone.text.toString())
                 intent.putExtra("storeId", getIntent().getIntExtra("store_id", 0))
                 startActivity(intent)
             } else {
@@ -217,17 +218,7 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
         }
         return dayList
     }
-/*
-    private fun yearMonthFromDate(date : LocalDate) : String {
-        var formatter = DateTimeFormatter.ofPattern("yyyy. MM월")
 
-        return date.format(formatter)
-    }
-
-    override fun onDayClick(dayText: String) {
-        var yearMonthDay = yearMonthFromDate(selectedDate) + " " + dayText + "일"
-        Toast.makeText(this, yearMonthDay,Toast.LENGTH_SHORT).show()
-    }*/
 
     override fun onDayClick(dayText: String) {
         // var yearMonthDay = monthYearFromDate(CalendarUtil.selectedDate)
@@ -292,7 +283,7 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
     // 예약 데이터 추가시 db에 저장
     private fun insertReservation() {
         var intent: Intent = intent
-        val memberId = binding.memberName.text.toString()
+        val memberId = MyApplication.email.toString()
         val storeId = intent.getIntExtra("store_id", 0)
         val reservationHeadCount = binding.num.text.toString()
         val requestContent = binding.requestContent.text.toString()
