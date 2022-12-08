@@ -23,6 +23,9 @@ interface WaitingDao {
     @Query("SELECT s.* from store s, waiting w where w.storeId=s.storeId")
     fun getWaitingAll() : List<Store>
 
-    @Query("SELECT s.* from store s, waiting w where w.storeId=s.storeId and w.waitingId =:waitingId")
-    fun getWaitingOne(waitingId : String): Store?
+    @Query("SELECT w.* from store s, waiting w where w.storeId=s.storeId")
+    fun getWaiting() : List<Waiting>
+
+    @Query("SELECT w.* from store s, waiting w where w.storeId=s.storeId and w.storeId =:storeId")
+    fun getWaitingOne(storeId : Int): Waiting?
 }

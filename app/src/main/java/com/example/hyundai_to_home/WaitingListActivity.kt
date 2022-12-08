@@ -45,7 +45,8 @@ class WaitingListActivity: AppCompatActivity() {
 
     private fun getAllWaitingList() {
         Thread {
-            storeList = ArrayList(waitingDao.getWaitingAll())
+                storeList = ArrayList(waitingDao.getWaitingAll())
+            waitingList = ArrayList(waitingDao.getWaiting())
             setRecyclerView()
         }.start()
     }
@@ -53,7 +54,7 @@ class WaitingListActivity: AppCompatActivity() {
     private fun setRecyclerView() {
         // 리사이클러뷰 설정
         runOnUiThread {
-            adapter = WaitingRecyclerViewAdapter(storeList) // ❷ 어댑터 객체 할당
+            adapter = WaitingRecyclerViewAdapter(storeList, waitingList) // ❷ 어댑터 객체 할당
             binding.waitingRecyclerView.adapter = adapter // 리사이클러뷰 어댑터로 위에서 만든 어댑터 설정
             binding.waitingRecyclerView.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) // 레이아웃 매니저 설정

@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.hyundai_to_home.databinding.ItemWaitingBinding
 import com.example.hyundai_to_home.db.Store
+import com.example.hyundai_to_home.db.Waiting
 
 class WaitingRecyclerViewAdapter(
-    val waitingList: ArrayList<Store>
+    val waitingList: ArrayList<Store>, val waiting : ArrayList<Waiting>
 ) : RecyclerView.Adapter<WaitingRecyclerViewAdapter.Holder>() {
 
     inner class Holder(
@@ -19,6 +20,7 @@ class WaitingRecyclerViewAdapter(
 
         fun bind(item: Store) {
             binding.storeName.text = item.storeName
+
             binding.storeContent.text = item.storeContent
 
             println("image: ${item.storeImage}")
@@ -26,6 +28,10 @@ class WaitingRecyclerViewAdapter(
             Glide.with(context)
                 .load(item.storeImage)
                 .into(binding.storeImage)
+        }
+
+        fun bind2(wait: Waiting) {
+            binding.storeState.text = wait.waitingState
         }
     }
 
@@ -38,6 +44,7 @@ class WaitingRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bind(waitingList[position])
+        holder.bind2(waiting[position])
     }
 
     override fun getItemCount(): Int {
