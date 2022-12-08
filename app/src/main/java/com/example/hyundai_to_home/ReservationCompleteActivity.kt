@@ -14,5 +14,9 @@ class ReservationCompleteActivity : AppCompatActivity(){
         // 뷰 바인딩
         binding = ActivityReservationCompleteBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
     }
 }

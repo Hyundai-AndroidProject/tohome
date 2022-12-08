@@ -55,9 +55,6 @@ class CalendarAdapter (private val dayList : ArrayList<Date> , private val onDay
         var iYear = dateCalendar.get(Calendar.YEAR)
         var iMonth = dateCalendar.get(Calendar.MONTH) + 1
         var iDay = dateCalendar.get(Calendar.DAY_OF_MONTH)
-        Log.i("1",iYear.toString())
-        Log.i("2",iMonth.toString())
-        Log.i("3",iDay.toString())
 
         // 현재 날짜
         var selectYear = CalendarUtil.selectedDate.get(Calendar.YEAR)
@@ -96,7 +93,6 @@ class CalendarAdapter (private val dayList : ArrayList<Date> , private val onDay
         // 날짜 클릭 이벤트
         holder.itemView.setOnClickListener {
             // 인터페이스를 통해 날짜를 넘겨준다
-            Log.i("클릭","클릭")
              var yearMonDay = "$iYear-$iMonth-$iDay"
              //Toast.makeText(holder.itemView.context, yearMonDay,Toast.LENGTH_SHORT).show()
 
