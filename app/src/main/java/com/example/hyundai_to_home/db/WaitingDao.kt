@@ -4,7 +4,12 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-
+/**
+ * Waiting 데이터 접근 객체
+ *
+ * @author  신기원
+ * 신기원 - findWaitingById, insertWaiting, waitingCancel, waitingSameStore 생성
+ */
 @Dao
 interface WaitingDao {
     @Insert

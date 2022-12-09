@@ -11,11 +11,12 @@ import com.example.hyundai_to_home.db.Store
 import com.example.hyundai_to_home.db.Waiting
 
 /**
- * Serialize 기능을 사용하여 file에 object 저장?
- * 해당 클래스에 대한 기능과 용도를 적어줍니다.
+ * 클래스 설명 : 웨이팅 목록을 보여주기 위한 Adapter 클래스 
  *
- * @author
- *
+ * @author  신기원
+ * 신기원 - 기존의 Store 타입이외의 Waiting 타입을 추가, Waiting에 대한 bind함수 생성
+ * 신기원 - 아이템 뷰 클릭시 해당 웨이팅 상세내역으로 넘어가는 클릭 이벤트 생성, 아이템 뷰에 waitingState 추가
+ * 
  */
 
 class WaitingRecyclerViewAdapter(

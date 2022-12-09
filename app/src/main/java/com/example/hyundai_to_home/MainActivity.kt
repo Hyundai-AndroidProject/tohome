@@ -11,7 +11,12 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.hyundai_to_home.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 
-//, NavigationView.OnNavigationItemSelectedListener
+/**
+ * 클래스 설명 : 어플 실행후 메인 화면
+ *
+ * @author  신기원
+ * 신기원 - 메인 화면 생성
+ */
 class MainActivity : AppCompatActivity(), View.OnClickListener{
 
 
