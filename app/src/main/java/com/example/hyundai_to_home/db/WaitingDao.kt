@@ -36,4 +36,5 @@ interface WaitingDao {
 
     @Query("select count(*) from waiting where storeId = :storeId")
     fun waitingSameStore(storeId: Int) : Int
+
 }

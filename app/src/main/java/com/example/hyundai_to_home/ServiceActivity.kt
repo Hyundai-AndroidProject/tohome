@@ -65,10 +65,7 @@ class ServiceActivity : AppCompatActivity(), View.OnClickListener, NavigationVie
                 startActivity(intent)
             }
 
-            R.id.btn_mypage -> {
-                val intent = Intent(this, MypageActivity::class.java)
-                startActivity(intent)
-            }
+
         }
     }
     /**
@@ -96,11 +93,7 @@ class ServiceActivity : AppCompatActivity(), View.OnClickListener, NavigationVie
      */
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
-            R.id.btn_mypage -> {
-                val intent = Intent(this, MypageActivity::class.java)
-                startActivity(intent)
-                return true
-            }
+
             R.id.mypage -> {
                 Log.d("mypage", "dfdf")
                 val intent = Intent(this, MypageActivity::class.java)
