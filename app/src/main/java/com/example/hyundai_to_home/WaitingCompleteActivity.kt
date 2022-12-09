@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 import com.example.hyundai_to_home.databinding.ActivityWaitingCompleteBinding
 import com.example.hyundai_to_home.db.AppDatabase
+import com.example.hyundai_to_home.db.StoreDao
 import com.example.hyundai_to_home.db.WaitingDao
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -21,7 +22,7 @@ class WaitingCompleteActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityWaitingCompleteBinding
     private lateinit var db: AppDatabase
     private lateinit var waitingDao: WaitingDao
-
+    private lateinit var storeDao: StoreDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -32,6 +33,7 @@ class WaitingCompleteActivity : AppCompatActivity(), View.OnClickListener {
 
         db = AppDatabase.getInstance(this)!!
         waitingDao = db.waitingDao()
+        storeDao = db.StoreDao()
         val getintent: Intent = getIntent()
         val memberId = getintent.getStringExtra("memberId")!!
         val storeId = getintent.getIntExtra("storeId", 0)
@@ -58,6 +60,7 @@ class WaitingCompleteActivity : AppCompatActivity(), View.OnClickListener {
             binding.txtWaiting.text = "고객님 앞에 ${waitingNumber!! - 1} 명 있습니다."
             binding.txtHeadcount.text = waiting.waitingHeadCount
             binding.txtDatetime.text = waiting.waitingDateTime
+            binding.txtStoreContent.text = storeDao.getStoreOne(storeId).storeContent
         }.start()
 
 
