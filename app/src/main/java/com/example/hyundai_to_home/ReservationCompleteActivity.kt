@@ -34,10 +34,13 @@ class ReservationCompleteActivity : AppCompatActivity(){
         val getintent: Intent = getIntent()
         // val memberId = getintent.getStringExtra("memberId")!!
         val memberPhone = getintent.getStringExtra("memberPhone")
+        val reservationId = getintent.getIntExtra("reservationId", 0)
         val storeId = getintent.getIntExtra("storeId", 0)
         val memberId = MyApplication.email.toString()
+        //val reservationState = getintent.getStringExtra("reservationState")!!
+
         Log.i("--------------------------id",memberId)
-        Log.i("--------------------------storeid",storeId.toString())
+        Log.i("--------------------------reservationId",reservationId.toString())
         // membername, id 정보 띄우기
         // storeid로 가게 이름 , 위치 가져오기
         // reservation 정보 가져오기
@@ -46,7 +49,7 @@ class ReservationCompleteActivity : AppCompatActivity(){
 
         // 로그인한 memberid로 바꿔야 함
         storeDetail(storeId)
-        reservationDetail(memberId,storeId)
+        reservationDetail(reservationId)
 
         binding.btnStoreList.setOnClickListener{
             val intent = Intent(this, ReservationListActivity::class.java)
@@ -54,7 +57,7 @@ class ReservationCompleteActivity : AppCompatActivity(){
         }
 
         binding.btnReservationCancel.setOnClickListener {
-            deleteReservation(memberId, storeId)
+            deleteReservation(reservationId)
             val intent = Intent(this, StoreListActivity::class.java)
             startActivity(intent)
         }
@@ -69,22 +72,23 @@ class ReservationCompleteActivity : AppCompatActivity(){
         }.start()
     }
 
-    fun reservationDetail(memberId : String, storeId : Int) {
+    fun reservationDetail(reservationId : Int) {
         Thread {
-            val reservation = reservationDao.findReservationById(memberId, storeId)
-
-            binding.reservationStateInfo.text = reservation.reservationSate.toString()
+            val reservation = reservationDao.findReservationById(reservationId)
+            Log.i("상태--------------",reservation.reservationSate.toString())
+            //binding.reservationStateInfo.text = reservation.reservationSate.toString()
             binding.reservationHeadCountInfo.text = "${reservation.reservationHeadCount.toString()} 명"
             binding.reservationNowInfo.text = reservation.reservationRegisterDate
             binding.reservationRequestContentInfo.text = reservation.reservationContent.toString()
             binding.reservationDate.text = reservation.reservationFixedDate.toString()
             binding.reservationTime.text = reservation.reservationFixedTime.toString()
+            binding.reservationStateInfo.text = reservation.reservationSate.toString()
         }.start()
     }
 
-    fun deleteReservation(memberId : String, storeId : Int) {
+    fun deleteReservation(reservationId : Int) {
         Thread {
-            val deleteReservation = reservationDao.cancelReservationById(memberId, storeId, "예약 취소")
+            val deleteReservation = reservationDao.cancelReservationById(reservationId, "예약 취소")
             runOnUiThread {
                 Toast.makeText(this, "예약이 취소 되었습니다.", Toast.LENGTH_SHORT).show()
             }

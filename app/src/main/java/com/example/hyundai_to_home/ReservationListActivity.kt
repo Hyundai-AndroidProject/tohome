@@ -20,13 +20,13 @@ class ReservationListActivity: AppCompatActivity(), OnClickListener {
     private lateinit var storeDao: StoreDao
     private lateinit var storeList: ArrayList<Store>
     private lateinit var reservationList: ArrayList<Reservation>
+    val memberId = MyApplication.email.toString()
 
     private lateinit var adapter: ReservationRecyclerViewAdapter
 
     private var store: Store? = null
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        MyApplication.email
         super.onCreate(savedInstanceState)
         // 뷰 바인딩
         binding = ActivityReservationListBinding.inflate(layoutInflater)
@@ -34,8 +34,7 @@ class ReservationListActivity: AppCompatActivity(), OnClickListener {
         // DB 인스턴스를 가져오고 DB작업을 할 수 있는 DAO를 가져옵니다.
         db = AppDatabase.getInstance(this)!!
         reservationDao = db.ReservationDao()
-
-        val memberId = MyApplication.email
+        storeDao = db.StoreDao()
 
         getAllReservationList()
 
@@ -46,7 +45,8 @@ class ReservationListActivity: AppCompatActivity(), OnClickListener {
 
     private fun getAllReservationList() {
         Thread {
-            storeList = ArrayList(reservationDao.getReservationAll())
+            reservationList = ArrayList(reservationDao.getReservation(memberId))
+            storeList = ArrayList(reservationDao.getReservationStoreAll(memberId))
             setRecyclerView()
         }.start()
     }
@@ -54,7 +54,7 @@ class ReservationListActivity: AppCompatActivity(), OnClickListener {
     private fun setRecyclerView() {
         // 리사이클러뷰 설정
         runOnUiThread {
-            adapter = ReservationRecyclerViewAdapter(storeList, this) // ❷ 어댑터 객체 할당
+            adapter = ReservationRecyclerViewAdapter(storeList, reservationList, this) // ❷ 어댑터 객체 할당
             binding.reservationRecyclerView.adapter = adapter // 리사이클러뷰 어댑터로 위에서 만든 어댑터 설정
             binding.reservationRecyclerView.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) // 레이아웃 매니저 설정
@@ -66,11 +66,12 @@ class ReservationListActivity: AppCompatActivity(), OnClickListener {
         getAllReservationList()
     }
 
-    override fun OnReservationClick(storeId: Int) {
+    override fun OnReservationClick(storeId : Int, reservationId: Int) {
         Log.i("storeid 넘기기",storeId.toString())
         val intent = Intent(this, ReservationCompleteActivity::class.java)
         // intent.putExtra("memberId", "로그인한 memberId")
         intent.putExtra("memberPhone", getIntent().getIntExtra("memberPhone", 0))
+        intent.putExtra("reservationId", reservationId)
         intent.putExtra("storeId", storeId)
         startActivity(intent)
     }

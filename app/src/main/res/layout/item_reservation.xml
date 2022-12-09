@@ -35,6 +35,7 @@
         tools:text="올댓커피"/>
 
     <TextView
+        android:id="@+id/store_sate"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"

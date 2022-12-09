@@ -37,7 +37,6 @@ class WaitingRecyclerViewAdapter(
          */
         fun bind(item: Store) {
             binding.storeName.text = item.storeName
-
             binding.storeContent.text = item.storeContent
 
             println("image: ${item.storeImage}")

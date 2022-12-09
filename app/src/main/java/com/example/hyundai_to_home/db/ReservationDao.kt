@@ -13,8 +13,8 @@ interface ReservationDao {
     @Insert
     fun addReservationDB(reservations : List<Reservation>)
 
-    @Query("SELECT s.* from store s, reservation r where r.storeId=s.storeId")
-    fun getReservationAll() : List<Store>
+    @Query("SELECT s.* from store s, reservation r where r.storeId=s.storeId and r.memberId = :memberId")
+    fun getReservationStoreAll(memberId: String) : List<Store>
 
     @Query("SELECT s.* from store s, reservation r where r.storeId=s.storeId and r.reservationId =:reservationId")
     fun getReservationOne(reservationId : String): Store?
@@ -23,9 +23,16 @@ interface ReservationDao {
     fun countReservation(storeId : Int, reservationFixedTime : String, reservationSate : String, reservationFixedDate : String) : Int
 
     // 예약 상세
-    @Query("SELECT r.* from reservation r where memberId = :memberId and storeId = :storeId")
-    fun findReservationById(memberId : String, storeId : Int) : Reservation
+    @Query("SELECT r.* from reservation r where reservationId =:reservationId")
+    fun findReservationById(reservationId : Int) : Reservation
 
-    @Query("UPDATE reservation SET reservationSate =:reservationSate WHERE memberId = :memberId and storeId = :storeId")
-    fun cancelReservationById(memberId : String, storeId : Int, reservationSate : String): Int
+    @Query("UPDATE reservation SET reservationSate =:reservationSate WHERE reservationId =:reservationId")
+    fun cancelReservationById(reservationId : Int , reservationSate : String): Int
+
+    @Query("SELECT * from reservation WHERE memberId = :memberId")
+    fun getReservation(memberId: String): List<Reservation>
+
+    @Query("SELECT count(*) from reservation ")
+    fun getReservationId() : Int
+
 }

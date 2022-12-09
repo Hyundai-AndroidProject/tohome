@@ -31,9 +31,10 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
     private lateinit var storeDao: StoreDao
     private lateinit var store: Store
 
-    lateinit var reservationFixedDate: String
-    lateinit var reservationFixedTime: String
+    var reservationFixedDate: String = ""
+    var reservationFixedTime: String = ""
     var pnum: Int = 1
+    var check = true
 
 
     private lateinit var reservationDao: ReservationDao
@@ -89,7 +90,14 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
         var count = 0
         var beforeselect = 0
         var times =
-            arrayOf(binding.linear1, binding.linear2, binding.linear3, binding.linear4, binding.linear5,binding.linear6)
+            arrayOf(
+                binding.linear1,
+                binding.linear2,
+                binding.linear3,
+                binding.linear4,
+                binding.linear5,
+                binding.linear6
+            )
 
         binding.linear1.setOnClickListener {
             // binding.view1.setTextColor(Color.BLACK)
@@ -135,22 +143,9 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
         }
 
         binding.btnConfirm.setOnClickListener {
+            check()
 
-            if (binding.check1.isChecked && binding.check2.isChecked) {
-                insertReservation()
-                runOnUiThread {
-                    Toast.makeText(this, "예약이 확정되었습니다.", Toast.LENGTH_SHORT).show()
-                }
-                val intent = Intent(this, ReservationCompleteActivity::class.java)
-                // intent.putExtra("memberId", binding.memberName.text.toString())
-                intent.putExtra("memberPhone", binding.memberPhone.text.toString())
-                intent.putExtra("storeId", getIntent().getIntExtra("store_id", 0))
-                startActivity(intent)
-            } else {
-                Toast.makeText(this, "모든 항목을 채워주세요.", Toast.LENGTH_SHORT).show()
-            }
         }
-
     }
 
     private fun minus() {
@@ -232,8 +227,22 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
 
         }
 
-        var times = arrayOf(binding.view1, binding.view2, binding.view3, binding.view4, binding.view5, binding.view6)
-        var timesText = arrayOf(binding.view1Text, binding.view2Text, binding.view3Text, binding.view4Text, binding.view5Text, binding.view6Text)
+        var times = arrayOf(
+            binding.view1,
+            binding.view2,
+            binding.view3,
+            binding.view4,
+            binding.view5,
+            binding.view6
+        )
+        var timesText = arrayOf(
+            binding.view1Text,
+            binding.view2Text,
+            binding.view3Text,
+            binding.view4Text,
+            binding.view5Text,
+            binding.view6Text
+        )
         // 시간 설정
         val storeId = intent.getIntExtra("store_id", 0)
         for (a in 0..times.size - 1) {
@@ -257,7 +266,7 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
                         timesText[a].text = "예약 마감"
                         times[a].text = newText
                     } else {
-                        timesText[a].text = "(" + num.toString()+"명 예약 중)"
+                        timesText[a].text = "(" + num.toString() + "명 예약 중)"
                     }
                 }
 
@@ -314,23 +323,61 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
                 reservation
             )
         }.start()
-
-        Log.i("예약 데이터", reservation.toString())
     }
 
-    // 시간을 입력 받아서 text 변경
-/*    private fun setTime(times : Array<Binding>) {
+    fun check() {
+        val memberId = MyApplication.email.toString()
         val storeId = intent.getIntExtra("store_id", 0)
+        var reservationId = -1
 
+        var Rname = binding.memberName.text
+        var RPhone = binding.memberPhone.text
 
-        for (a in 0..times.size) {
-            var num: Int = 0
-            Thread {
-                num = reservationDao.countReservation(storeId, times[a].text.toString())
-            }.start()
-            if (num > 1) {
-                times[a].setText("예약 마감")
+        Thread {
+            reservationId = reservationDao.getReservationId() + 1
+        }.start()
+
+        Log.i("----------------------예약 id",reservationId.toString())
+
+        // 가게에 대해 예약 화정인 정보가 있다면 더이상 insert 할 수 없도록 설정
+        Thread {
+            var reservationList = reservationDao.getReservation(memberId)
+            for (i in 0..reservationList.size - 1) {
+                if (reservationList[i].storeId == storeId && reservationList[i].memberId == memberId && reservationList[i].reservationSate == "예약 확정") {
+                    check = false
+                    runOnUiThread {
+                        Toast.makeText(this, "이미 가게에 대한 예약 데이터가 존재 합니다", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, ReservationListActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
             }
-        }
-    }*/
+            if (check) {
+                runOnUiThread {
+                    if (reservationFixedDate.isBlank() || reservationFixedTime.isBlank()) {
+                        Toast.makeText(this, "날짜와 시간을 선택해 주세요.", Toast.LENGTH_SHORT).show()
+                    } else {
+                        if (binding.check1.isChecked && binding.check2.isChecked) {
+
+                            if (Rname.isBlank() || RPhone.isBlank()) {
+                                Toast.makeText(this, "모든 항목을 작성해주세요.", Toast.LENGTH_SHORT).show()
+                            } else {
+                                insertReservation()
+
+                                Toast.makeText(this, "예약이 확정되었습니다.", Toast.LENGTH_SHORT).show()
+                                val intent = Intent(this, ReservationCompleteActivity::class.java)
+                                // intent.putExtra("memberId", binding.memberName.text.toString())
+                                intent.putExtra("memberPhone", binding.memberPhone.text.toString())
+                                intent.putExtra("reservationId", reservationId)
+                                intent.putExtra("storeId", getIntent().getIntExtra("store_id", 0))
+                                startActivity(intent)
+                            }
+                        } else {
+                            Toast.makeText(this, "동의를 체크해 주세요.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+        }.start()
+    }
 }
