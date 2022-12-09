@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.example.hyundai_to_home.databinding.ActivityWaitingCancelActiivityBinding
 import com.example.hyundai_to_home.databinding.ActivityWaitingCompleteBinding
 import com.example.hyundai_to_home.db.AppDatabase
+import com.example.hyundai_to_home.db.StoreDao
 import com.example.hyundai_to_home.db.WaitingDao
 /**
  * 클래스 설명 : 웨이팅 신청 이후 웨이팅 상세내역을 보여주는 클래스
@@ -18,7 +19,7 @@ class WaitingCancelActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWaitingCancelActiivityBinding
     private lateinit var db: AppDatabase
     private lateinit var waitingDao: WaitingDao
-
+    private lateinit var storeDao: StoreDao
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 뷰 바인딩
@@ -27,6 +28,8 @@ class WaitingCancelActivity : AppCompatActivity() {
 
         db = AppDatabase.getInstance(this)!!
         waitingDao = db.waitingDao()
+        storeDao = db.StoreDao()
+
         val getintent: Intent = getIntent()
         val memberId = getintent.getStringExtra("memberId")!!
         val storeId = getintent.getIntExtra("storeId", 0)
@@ -52,6 +55,7 @@ class WaitingCancelActivity : AppCompatActivity() {
             binding.waitingNumber.text = waitingDao.waitingSameStore(storeId).toString()
             binding.txtHeadcount.text = waiting.waitingHeadCount
             binding.txtDatetime.text = waiting.waitingDateTime
+            binding.txtStoreContent.text = storeDao.getStoreOne(storeId).storeContent
         }.start()
     }
 }
