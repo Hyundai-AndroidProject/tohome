@@ -22,6 +22,11 @@ class MypageActivity: AppCompatActivity() {
         binding = ActivityMypageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // 뒤로가기 버튼
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+
         //intent를 사용해 예약리스트 액티비티로 넘어가는 리스너 구현
         binding.btnReservationList.setOnClickListener {
             val intent = Intent(this, ReservationListActivity::class.java)
