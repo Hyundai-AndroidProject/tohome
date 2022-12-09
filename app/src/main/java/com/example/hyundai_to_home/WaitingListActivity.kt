@@ -8,6 +8,15 @@ import com.example.hyundai_to_home.adapter.WaitingRecyclerViewAdapter
 import com.example.hyundai_to_home.databinding.ActivityWaitingListBinding
 import com.example.hyundai_to_home.db.*
 
+/**
+ * 클래스 설명 : 사용자의 웨이팅 목록을 보여주는 클래스
+ *
+ * @author  이름1, 이름2
+ * 이름1 - 기능1 구현
+ * 이름2 - 기능2 구현
+ * 이름3 - 기능3 구현
+ */
+
 class WaitingListActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivityWaitingListBinding
@@ -21,6 +30,13 @@ class WaitingListActivity: AppCompatActivity() {
     private lateinit var adapter: WaitingRecyclerViewAdapter
 
     private var store: Store? = null
+    /**
+     * 메서드 설명 : A 기능을 한다
+     * A+B 연산을 한다
+     *
+     * @param   파라미터 값
+     * @return  반환 값
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)

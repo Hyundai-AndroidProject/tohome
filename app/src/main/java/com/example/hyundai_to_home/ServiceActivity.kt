@@ -15,7 +15,12 @@ import com.example.hyundai_to_home.databinding.ActivityServiceBinding
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 
-//
+/**
+ * 클래스 설명 : 여러 서비스를 보여주는 클래스, Navigation Drawable을 이용하여 상단의 툴바에서 메뉴창을 확장할 수 있다
+ *
+ * @author  신기원
+ * 신기원 - drawable menu를 위한 툴바와 메뉴 생성
+ */
 class ServiceActivity : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigationItemSelectedListener{
 
 
@@ -66,8 +71,12 @@ class ServiceActivity : AppCompatActivity(), View.OnClickListener, NavigationVie
             }
         }
     }
-
-    // 툴바 메뉴 버튼이 클릭 됐을 때 실행하는 함수
+    /**
+     * 툴바 메뉴 버튼이 클릭 됐을 때 실행하는 함수
+     *
+     * @param   툴바 메뉴에서 선택된 item 항목
+     * @return  Boolean
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
             android.R.id.home ->{
@@ -79,6 +88,12 @@ class ServiceActivity : AppCompatActivity(), View.OnClickListener, NavigationVie
         return super.onOptionsItemSelected(item)
     }
 
+    /**
+     * 메뉴바가 열렸을 때 item에 대한 클릭 이벤트
+     *
+     * @param   메뉴에서 선택된 item 항목
+     * @return  Boolean
+     */
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
             R.id.btn_mypage -> {

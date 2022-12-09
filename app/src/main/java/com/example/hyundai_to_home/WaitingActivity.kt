@@ -12,7 +12,12 @@ import com.example.hyundai_to_home.db.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-
+/**
+ * 클래스 설명 : 웨이팅 예약을 진행하는 클래스
+ *
+ * @author  신기원
+ * 신기원 - 버튼 클릭시 웨이팅 예약을 하기 위해 DB에 입력 데이터 저장
+ */
 class WaitingActivity: AppCompatActivity(){
     private lateinit var binding: ActivityWaitingBinding
 
@@ -45,13 +50,14 @@ class WaitingActivity: AppCompatActivity(){
         }
 
         //intent를 사용해 다음 액티비티로 넘어가는 리스너 구현
-        binding.btnWaitingComplete.setOnClickListener {
 
+        binding.btnWaitingComplete.setOnClickListener {
+            //개인정보에 대한 체크 박스의 확인
             if(binding.check1.isChecked && binding.check2.isChecked){
                 val memberId = MyApplication.email!!
                 val storeId = getIntent().getIntExtra("store_id", 0)
                 Thread{
-                    Log.d("waiting", (waitingDao.findWaitingById(memberId, storeId )!=null).toString())
+                    //해당 식당에 웨이팅 예약 내역이 있으면 웨이팅 불가
                     if(waitingDao.findWaitingById(memberId, storeId )!= null){
                         runOnUiThread{
                             Toast.makeText(this, "이미 해당 식당에 웨이팅하셨습니다.", Toast.LENGTH_SHORT).show()
@@ -68,11 +74,9 @@ class WaitingActivity: AppCompatActivity(){
                         startActivity(intent)
                     }
                 }.start()
-                
-
 
             } else {
-                Toast.makeText(this, "모든 항목을 채워주세요.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "정보 제공 동의를 체크해주세요.", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -80,6 +84,8 @@ class WaitingActivity: AppCompatActivity(){
     //웨이팅 데이터 추가시 db에 저장
     private fun insertWaiting() {
         var intent : Intent = getIntent()
+
+        //Firebase에 저장된 회원ID 값
         val memberId = MyApplication.email!!
         val memberName = binding.memberName.text.toString();
         val memberPhone =binding.memberPhone.text.toString()
@@ -93,7 +99,7 @@ class WaitingActivity: AppCompatActivity(){
 
 //        val waitingState = WaitingState.예약완료
 
-        //개인정보에 대한 체크 박스의 확인
+
         Thread {
             waitingDao.insertWaiting(Waiting(null, memberId, memberName, memberPhone, storeId, dateAndtime, waitingNum, "예약완료"))
 
