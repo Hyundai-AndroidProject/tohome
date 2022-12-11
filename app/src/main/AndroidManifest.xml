@@ -16,6 +16,9 @@
         android:name=".MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".FindActivity"
+            android:exported="true" />
+        <activity
             android:name=".SignupActivity"
             android:exported="true" />
         <activity

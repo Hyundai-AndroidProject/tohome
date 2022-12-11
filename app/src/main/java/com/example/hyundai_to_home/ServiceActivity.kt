@@ -27,7 +27,7 @@ class ServiceActivity : AppCompatActivity(), View.OnClickListener, NavigationVie
     private lateinit var drawerLayout : DrawerLayout
     private lateinit var navigationView : NavigationView
     private  lateinit var  binding : ActivityServiceBinding          // 뷰바인딩 객체
-
+    private var backKeyPressedTime : Long = 0
     private lateinit var MemberId : String      //임시 회원 아이디
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,7 +105,16 @@ class ServiceActivity : AppCompatActivity(), View.OnClickListener, NavigationVie
     }
 
     override fun onBackPressed() {
-        //super.onBackPressed()
+
+        if(System.currentTimeMillis() > backKeyPressedTime + 2500){
+            backKeyPressedTime = System.currentTimeMillis();
+            Toast.makeText(this,"뒤로가기 버튼을 한번 더 누르면 종료됩니다",Toast.LENGTH_SHORT).show()
+            return;
+        }
+
+        if(System.currentTimeMillis() <= backKeyPressedTime +2500){
+            finishAffinity()
+        }
     }
 
 

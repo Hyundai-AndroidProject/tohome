@@ -12,6 +12,7 @@ import com.example.hyundai_to_home.databinding.ActivityLoginBinding
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityLoginBinding
+private var backKeyPressedTime : Long = 0
 class LoginActivity :  AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,76 +32,59 @@ class LoginActivity :  AppCompatActivity(){
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
+        binding.btnFindID.setOnClickListener{
+            val intent = Intent(this,FindActivity::class.java )
+            startActivity(intent)
+        }
+
         binding.loginBtn.setOnClickListener {
             //이메일, 비밀번호 로그인.......................
             val email = binding.LoginText.text.toString()
             val password = binding.editTextTextPassword.text.toString()
-            MyApplication.auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this){ task ->
-                    binding.LoginText.text.clear()
-                    binding.editTextTextPassword.text.clear()
-                    if(task.isSuccessful){
-                        if(MyApplication.checkAuth()){
-                            print("로그인성공")
-                            MyApplication.email = email
-                            val intent = Intent(this, ServiceActivity::class.java)
-                            startActivity(intent)
-                            //changeVisibility("login")
+            if(email.isEmpty()){
+                Toast.makeText(this,"아이디를 입력해주세요",Toast.LENGTH_SHORT).show()
+            }
+            else if(password.isEmpty()){
+                Toast.makeText(this,"비밀번호를 입력해주세요",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                MyApplication.auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this){ task ->
+                        binding.LoginText.text.clear()
+                        binding.editTextTextPassword.text.clear()
+                        if(task.isSuccessful){
+                            if(MyApplication.checkAuth()){
+                                print("로그인성공")
+                                MyApplication.email = email
+                                val intent = Intent(this, ServiceActivity::class.java)
+                                startActivity(intent)
+
+                            }else {
+                                print("인증안됨")
+                                Toast.makeText(baseContext, "전송된 메일로 이메일 인증이 되지 않았습니다.", Toast.LENGTH_SHORT).show()
+
+                            }
                         }else {
-                            print("인증안됨")
-                            Toast.makeText(baseContext, "전송된 메일로 이메일 인증이 되지 않았습니다.", Toast.LENGTH_SHORT).show()
-
+                            print("로그인실패")
+                            Toast.makeText(baseContext, "로그인 실패", Toast.LENGTH_SHORT).show()
                         }
-                    }else {
-                        print("로그인실패")
-                        Toast.makeText(baseContext, "로그인 실패", Toast.LENGTH_SHORT).show()
                     }
-                }
-
+            }
         }
 
-        }
+    }
     override fun onBackPressed() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        if(System.currentTimeMillis() > backKeyPressedTime + 2500){
+            backKeyPressedTime = System.currentTimeMillis();
+            Toast.makeText(this,"뒤로가기 버튼을 한번 더 누르면 종료됩니다",Toast.LENGTH_SHORT).show()
+            return;
+        }
+
+        if(System.currentTimeMillis() <= backKeyPressedTime +2500){
+            finishAffinity()
+        }
     }
 
-    }
-
-    /* fun changeVisibility(mode: String) {
-         if (mode === "login") {
-             binding2.run {
-                 mainText.text = "${MyApplication.email} 님 반갑습니다."
-                 btnLogin.visibility = View.GONE
-                 //logoutBtn.visibility= View.VISIBLE
-                 //goSignInBtn.visibility= View.GONE
-                 //googleLoginBtn.visibility= View.GONE
-                 //authEmailEditView.visibility= View.GONE
-                 //authPasswordEditView.visibility= View.GONE
-                 //signBtn.visibility= View.GONE
-                 //loginBtn.visibility= View.GONE
-             }
-
-         }else if(mode === "logout"){
-             binding.run {
-                 //authMainTextView.text = "로그인 하거나 회원가입 해주세요."
-                 //logoutBtn.visibility = View.GONE
-                 //goSignInBtn.visibility = View.VISIBLE
-                 //googleLoginBtn.visibility = View.VISIBLE
-                 //authEmailEditView.visibility = View.VISIBLE
-                 //authPasswordEditView.visibility = View.VISIBLE
-                 //signBtn.visibility = View.GONE
-                 //loginBtn.visibility = View.VISIBLE
-             }
-         }else if(mode === "signin"){
-             binding.run {
-                 logoutBtn.visibility = View.GONE
-                 goSignInBtn.visibility = View.GONE
-                 googleLoginBtn.visibility = View.GONE
-                 authEmailEditView.visibility = View.VISIBLE
-                 authPasswordEditView.visibility = View.VISIBLE
-                 signBtn.visibility = View.VISIBLE
-                 loginBtn.visibility = View.GONE
-             }
-         }*/
+}
 

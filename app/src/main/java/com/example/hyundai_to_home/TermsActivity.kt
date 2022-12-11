@@ -36,8 +36,6 @@ class TermsActivity : AppCompatActivity() {
         binding.marketingSMS.setOnClickListener{onCheckChangedMarketing(binding.marketingSMS)}
         binding.marketingEmail.setOnClickListener{onCheckChangedMarketing(binding.marketingEmail)}
 
-
-
         goSignup.setOnClickListener {
             if(binding.checkTerm1.isChecked){
                 if(binding.checkTerm2.isChecked){
@@ -126,6 +124,10 @@ class TermsActivity : AppCompatActivity() {
 
             }
         }
+    }
+    override fun onBackPressed() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
     }
 
 }
