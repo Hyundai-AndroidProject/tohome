@@ -9,7 +9,13 @@ import com.example.hyundai_to_home.databinding.ActivityReservationCompleteBindin
 import com.example.hyundai_to_home.db.AppDatabase
 import com.example.hyundai_to_home.db.ReservationDao
 import com.example.hyundai_to_home.db.StoreDao
-
+/**
+ * 클래스 설명 : 식당 예약 완료 상세 화면을 띄우는 클래스
+ *
+ * @author  박서은
+ * 박서은 - 식당 정보 & 예약 인원 & 날짜 & 시간을 통해 예약 상세화면 뜨도록 구현
+ * 박서은 - reservationid, storeid를 받아와 데이터 조회
+ */
 class ReservationCompleteActivity : AppCompatActivity(){
     private lateinit var binding: ActivityReservationCompleteBinding
     private lateinit var db : AppDatabase
@@ -32,15 +38,11 @@ class ReservationCompleteActivity : AppCompatActivity(){
         storeDao = db.StoreDao()
 
         val getintent: Intent = getIntent()
-        // val memberId = getintent.getStringExtra("memberId")!!
         val memberPhone = getintent.getStringExtra("memberPhone")
         val reservationId = getintent.getIntExtra("reservationId", 0)
         val storeId = getintent.getIntExtra("storeId", 0)
         val memberId = MyApplication.email.toString()
-        //val reservationState = getintent.getStringExtra("reservationState")!!
 
-        Log.i("--------------------------id",memberId)
-        Log.i("--------------------------reservationId",reservationId.toString())
         // membername, id 정보 띄우기
         // storeid로 가게 이름 , 위치 가져오기
         // reservation 정보 가져오기
@@ -75,8 +77,6 @@ class ReservationCompleteActivity : AppCompatActivity(){
     fun reservationDetail(reservationId : Int) {
         Thread {
             val reservation = reservationDao.findReservationById(reservationId)
-            Log.i("상태--------------",reservation.reservationSate.toString())
-            //binding.reservationStateInfo.text = reservation.reservationSate.toString()
             binding.reservationHeadCountInfo.text = "${reservation.reservationHeadCount.toString()} 명"
             binding.reservationNowInfo.text = reservation.reservationRegisterDate
             binding.reservationRequestContentInfo.text = reservation.reservationContent.toString()
@@ -94,5 +94,4 @@ class ReservationCompleteActivity : AppCompatActivity(){
             }
         }.start()
     }
-
 }

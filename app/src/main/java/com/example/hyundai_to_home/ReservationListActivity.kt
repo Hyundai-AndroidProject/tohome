@@ -9,7 +9,13 @@ import com.example.hyundai_to_home.adapter.ReservationRecyclerViewAdapter
 import com.example.hyundai_to_home.databinding.ActivityReservationListBinding
 import com.example.hyundai_to_home.db.*
 import com.example.hyundai_to_home.listner.OnClickListener
-
+/**
+ * 클래스 설명 : 식당 예약 완료 상세 화면을 띄우는 클래스
+ *
+ * @author  정승하, 박서은
+ * 정승하 - 리사이클러뷰를 통해 예약한 식당 리스트 띄우기
+ * 박서은 - 예약 상세 내역을 띄우기 위해 reservationid, storeid를 reservationcompleteActivity에 넘김
+ */
 class ReservationListActivity: AppCompatActivity(), OnClickListener {
 
 
@@ -71,7 +77,6 @@ class ReservationListActivity: AppCompatActivity(), OnClickListener {
     override fun OnReservationClick(storeId : Int, reservationId: Int) {
         Log.i("storeid 넘기기",storeId.toString())
         val intent = Intent(this, ReservationCompleteActivity::class.java)
-        // intent.putExtra("memberId", "로그인한 memberId")
         intent.putExtra("memberPhone", getIntent().getIntExtra("memberPhone", 0))
         intent.putExtra("reservationId", reservationId)
         intent.putExtra("storeId", storeId)

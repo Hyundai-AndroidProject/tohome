@@ -22,7 +22,16 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.properties.Delegates
-
+/**
+ * 클래스 설명 : 식당 예약을 진행하는 클래스
+ *
+ * @author  박서은
+ * 박서은 - 인원 변경 & 날짜 선택 & 시간 선택을 통해 예약 데이터 저장
+ * 박서은 - 한 사람당 한 가게에 한번만 예약 확정할 수 있도록 구현
+ * 박서은 - 날짜별 시간당 제한 인원을 2명으로 두어 2명이 넘어가면 예약 마감이 뜨도록 구현
+ * 박서은 - 예약 취소 시 가게에 대해 다시 예약을 진행할 수 있도록 구현
+ * 박서은 - 예약 상세 내역을 띄우기 위해 reservationid, storeid를 reservationcompleteActivity에 넘김
+ */
 class ReservationActivity : AppCompatActivity(), OnDayListener {
 
     lateinit var binding: ActivityReservationBinding
@@ -256,11 +265,6 @@ class ReservationActivity : AppCompatActivity(), OnDayListener {
                     "예약 확정",
                     reservationFixedDate
                 )
-                Log.i("------------------시간 인원-------------", num.toString())
-                Log.i("------------------시간------------------", times[a].text.toString())
-                Log.i("가게id", storeId.toString())
-                Log.i("-----------------선택 날짜--------------", reservationFixedDate)
-
                 runOnUiThread {
                     if (num > 1) {
                         timesText[a].text = "예약 마감"

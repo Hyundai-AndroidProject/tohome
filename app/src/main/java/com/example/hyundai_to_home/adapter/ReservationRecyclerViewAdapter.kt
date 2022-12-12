@@ -6,12 +6,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.hyundai_to_home.WaitingCompleteActivity
 import com.example.hyundai_to_home.databinding.ItemReservationBinding
-import com.example.hyundai_to_home.databinding.ItemWaitingBinding
 import com.example.hyundai_to_home.db.*
 import com.example.hyundai_to_home.listner.OnClickListener
-
+/**
+ * 클래스 설명 : 예약 리스트를 띄우기 위한 어댑터
+ *
+ * @author  정승하, 박서은
+ * 정승하 - 예약 리스트를 띄우기 위한 어댑터 구현
+ * 박서은 - 예약 리스트 클릭시 상세 내역 조회를 위한 기능 구현
+ */
 class ReservationRecyclerViewAdapter(
     val storeList: ArrayList<Store>, val reservationlist : ArrayList<Reservation> , private val onClickListener: OnClickListener
 ) : RecyclerView.Adapter<ReservationRecyclerViewAdapter.Holder>() {
@@ -34,8 +38,6 @@ class ReservationRecyclerViewAdapter(
             Glide.with(context)
                 .load(item.storeImage)
                 .into(binding.storeImage)
-
-
         }
 
         fun bind2(item: Reservation) {

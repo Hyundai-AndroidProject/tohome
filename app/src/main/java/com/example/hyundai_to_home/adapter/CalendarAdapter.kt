@@ -14,7 +14,13 @@ import com.example.hyundai_to_home.listner.OnDayListener
 import com.example.hyundai_to_home.util.CalendarUtil
 import java.util.Calendar
 import java.util.Date
-
+/**
+ * 클래스 설명 : 날짜 리스트를 띄우기 위한 어댑터
+ *
+ * @author  박서은
+ * 박서은 - 달력 표시를 위한 날짜 리스트를 리사이클러뷰로 구현
+ * 박서은 - 날짜별로 클릭 이벤트를 달아 날짜별로 시간대가 뜨도록 구현
+ */
 class CalendarAdapter (private val dayList : ArrayList<Date> , private val onDayListner: OnDayListener)
     : RecyclerView.Adapter <CalendarAdapter.ItemViewHolder>(){
 
