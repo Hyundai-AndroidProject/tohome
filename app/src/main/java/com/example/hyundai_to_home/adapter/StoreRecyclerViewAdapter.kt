@@ -9,7 +9,13 @@ import com.example.hyundai_to_home.ReservationActivity
 import com.example.hyundai_to_home.WaitingActivity
 import com.example.hyundai_to_home.databinding.ItemStoreBinding
 import com.example.hyundai_to_home.db.Store
-
+/**
+ * 클래스 설명 : 예약 리스트를 띄우기 위한 어댑터
+ *
+ * @author  정승하
+ * 정승하 - 식당 리스트를 띄우기 위한 어댑터 구현
+ * 정승하 - 예약, 웨이팅 버튼으로 예약, 웨이팅 액티비티으로 전환하도록 구현
+ */
 class StoreRecyclerViewAdapter(
     val storeList: ArrayList<Store>
 ) : RecyclerView.Adapter<StoreRecyclerViewAdapter.Holder>() {

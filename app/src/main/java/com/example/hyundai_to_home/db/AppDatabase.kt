@@ -8,7 +8,13 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
+/**
+ * 클래스 설명 : 식당 데이터 entity
+ *
+ * @author  정승하
+ * 정승하 - 식당 더미데이터 생성 및 데이터베이스에 삽입
+ * 정승하 - Dao 선언 및 데이터베이스 연결
+ */
 @Database(entities = [Store::class, Waiting::class, Reservation::class,Member::class],version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -21,13 +27,6 @@ abstract class AppDatabase : RoomDatabase() {
         var appDatabase : AppDatabase? = null
 
         fun getInstance(context : Context) : AppDatabase? {
-            /*if(appDatabase == null){
-                appDatabase =  Room.databaseBuilder(context,
-                    AppDatabase::class.java,
-                    databaseName).
-                fallbackToDestructiveMigration()
-                    .build()
-            }*/
             if(appDatabase == null){
                 synchronized(AppDatabase::class){
                     //데이터베이스 인스턴스를 생성하고 해당 인스턴스로 DAO인스턴스의 메서드를 사용할 수 있게된다
@@ -39,8 +38,6 @@ abstract class AppDatabase : RoomDatabase() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
                             fillStoreInDb(context.applicationContext)
-                            //fillWaitingInDb(context.applicationContext)
-                            //fillReservationInDb(context.applicationContext)
                         }
                     }).build()
                 }
@@ -75,26 +72,6 @@ private val STORE_DATA = arrayListOf(
     Store(13, "도원스타일(6F)", "정통 중식을 현대적인 공간에서 만날 수 있습니다.", "https://user-images.githubusercontent.com/52660729/206346609-f7ed7384-bb15-47be-93a0-a774edcb9a30.jpg","천호점"),
     Store(14, "로라스블랑(6F)", "백색 월계수라는 의미를 가진 로라스 블랑은 음식은 물론 접시 하나에도 유럽의 느끼을 담아낸 뉴 클래식 브런치 카페입니다.","https://user-images.githubusercontent.com/52660729/206346606-babbbe88-0258-45f6-844b-17844cb79232.jpg","천호점"),
     Store(15, "오븐(2F)","차, 커피와 함께 먹을 수 있는 다양한 나라의 구운과자를 새로운 시작으로 재해석해 익숙하지만 새로운 맛을 만드는 카페","https://user-images.githubusercontent.com/52660729/206346603-9f7cf697-1a2d-4ffa-8fe1-852647bbb9f2.jpg","천호점")
-    //신촌점
-    //Store(16),
-    //Store(17),
-    //Store(18),
-    //Store(19),
-    //Store(20),
-
-    //디큐브시티
-    //Store(21),
-    //Store(22),
-    //Store(23),
-    //Store(24),
-    //Store(25),
-
-    //판교점
-    //Store(26),
-    //Store(27),
-    //Store(28),
-    //Store(29),
-    //Store(30),
 )
 
 private val WAITING_DATA = arrayListOf(

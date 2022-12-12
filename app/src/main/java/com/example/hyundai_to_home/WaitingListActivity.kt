@@ -9,12 +9,11 @@ import com.example.hyundai_to_home.databinding.ActivityWaitingListBinding
 import com.example.hyundai_to_home.db.*
 
 /**
- * 클래스 설명 : 사용자의 웨이팅 목록을 보여주는 클래스
+ * 클래스 설명 : 웨이팅 예약 리스트를 반환하는 클래스
  *
- * @author  이름1, 이름2
- * 이름1 - 기능1 구현
- * 이름2 - 기능2 구현
- * 이름3 - 기능3 구현
+ * @author  정승하, 신기원
+ * 신기원 - 예약
+ * 정승하 - 리사이클뷰 어댑터를 사용하여 리사이클러뷰 생성
  */
 
 class WaitingListActivity: AppCompatActivity() {

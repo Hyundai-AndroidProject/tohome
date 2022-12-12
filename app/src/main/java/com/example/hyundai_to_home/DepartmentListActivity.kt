@@ -7,7 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import com.example.hyundai_to_home.databinding.ActivityDepartmentListBinding
 import com.example.hyundai_to_home.databinding.ActivityWaitingBinding
-
+/**
+ * 클래스 설명 : 현대백화점 지점 리스트를 반환하는 클래스
+ *
+ * @author  정승하
+ * 정승하 - 6개의 현대백화점 지점 설정 및 클릭이벤트 설정
+ * 정승하 - 클린이벤트로 지점별 식당리스트 반환하도록 구현
+ */
 class DepartmentListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDepartmentListBinding
 

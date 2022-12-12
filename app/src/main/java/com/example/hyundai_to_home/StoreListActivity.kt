@@ -10,7 +10,13 @@ import com.example.hyundai_to_home.databinding.ActivityStoreListBinding
 import com.example.hyundai_to_home.db.AppDatabase
 import com.example.hyundai_to_home.db.StoreDao
 import com.example.hyundai_to_home.db.Store
-
+/**
+ * 클래스 설명 : 식당 리스트를 반환하는 클래스
+ *
+ * @author  정승하
+ * 정승하 - 지점별 식당 리스트(5개정도) 반환하도록 구현
+ * 정승하 - 리사이클뷰 어댑터를 사용하여 리사이클러뷰 생성
+ */
 class StoreListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityStoreListBinding
