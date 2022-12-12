@@ -4,7 +4,12 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-
+/**
+ * 클래스 설명 : 회원 데이터 처리를 위한 dao
+ *
+ * @author  김민규
+ * 김민규 - 회원 데이터 처리를 위한 dao 생성
+ */
 @Dao
 interface MemberDao {
 

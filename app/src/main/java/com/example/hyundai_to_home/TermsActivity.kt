@@ -8,7 +8,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hyundai_to_home.databinding.ActivityTermsBinding
 
-
+/**
+ * 클래스 설명 : 이용약관 클래스
+ *
+ * @author  김민규
+ * 김민규 - 전체 선택 버튼 구현
+ * 김민규 - 필수 선택 버튼 구현
+ */
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityTermsBinding
 
@@ -40,7 +46,7 @@ class TermsActivity : AppCompatActivity() {
             val intent = Intent(this,LoginActivity::class.java)
             startActivity(intent)
         }
-        goSignup.setOnClickListener {
+        goSignup.setOnClickListener { // 필수선택 버튼 구현
             if(binding.checkTerm1.isChecked){
                 if(binding.checkTerm2.isChecked){
                     if(binding.untilSecede.isChecked) {
@@ -77,7 +83,7 @@ class TermsActivity : AppCompatActivity() {
         }
     }
 
-    private fun onCheckChangedTerms(checkBox: CheckBox) {
+    private fun onCheckChangedTerms(checkBox: CheckBox) { // 이용약관 전체선택 버튼 구현
         when (checkBox.id) {
             R.id.checkAll -> {
                 if (binding.checkAll.isChecked) {
@@ -105,7 +111,7 @@ class TermsActivity : AppCompatActivity() {
         }
     }
 
-    private fun onCheckChangedMarketing(checkBox: CheckBox){
+    private fun onCheckChangedMarketing(checkBox: CheckBox){ // 마케팅관련 전체선택 버튼 구현
         when(checkBox.id){
             R.id.marketingAll ->{
                 if(binding.marketingAll.isChecked){

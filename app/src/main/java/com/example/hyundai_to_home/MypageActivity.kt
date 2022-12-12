@@ -14,7 +14,15 @@ import com.example.hyundai_to_home.db.AppDatabase
 import com.example.hyundai_to_home.db.Member
 import com.example.hyundai_to_home.db.MemberDao
 import com.google.firebase.auth.FirebaseAuth
-
+/**
+ * 클래스 설명 : 마이페이지 클래스
+ *
+ * @author  김민규
+ * 김민규 - 회원정보 출력
+ * 김민규 - 비밀번호 변경기능
+ * 신기원 - 예약, 웨이팅 조회로 이동하는 버튼 구현
+ * 김민규 - 로그아웃, 회원탈퇴기능
+ */
 
 class MypageActivity: AppCompatActivity() {
     private lateinit var db : AppDatabase
@@ -35,7 +43,7 @@ class MypageActivity: AppCompatActivity() {
 
 
 
-        Thread{
+        Thread{ // 회원정보 출력
             val memberInfo : Member = memberDao.getMemberInfo(MyApplication.email.toString())
             runOnUiThread{
                 binding.memberName.text = memberInfo.memberName
@@ -60,14 +68,14 @@ class MypageActivity: AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.logout.setOnClickListener{
+        binding.logout.setOnClickListener{ // 로그아웃 기능
             MyApplication.auth.signOut()
             MyApplication.email = null
             val intent = Intent(this,LoginActivity::class.java)
             startActivity(intent)
         }
 
-        binding.delete.setOnClickListener{
+        binding.delete.setOnClickListener{ // 회원탈퇴 기능 --> Firebase와 Room DB 에서 동시에 삭제된다.
             val builder = AlertDialog.Builder(this)
             builder.setTitle("주의!")
             builder.setMessage("정말로 삭제하시겠습니까?")
@@ -85,7 +93,7 @@ class MypageActivity: AppCompatActivity() {
 
         }
 
-        binding.btnPasswordChange.setOnClickListener{
+        binding.btnPasswordChange.setOnClickListener{ // 비밀번호 변경기능
             val editTextNewPassword = EditText(this)
             editTextNewPassword.transformationMethod = PasswordTransformationMethod.getInstance()
             val alertDialog = AlertDialog.Builder(this)
@@ -100,7 +108,7 @@ class MypageActivity: AppCompatActivity() {
             alertDialog.setPositiveButton("취소") { dialogInterface, _ -> dialogInterface.dismiss() }
             alertDialog.show()
         }
-        binding.preview.setOnClickListener{
+        binding.preview.setOnClickListener{ 
             onBackPressed()
         }
         binding.preview2.setOnClickListener{
@@ -109,13 +117,13 @@ class MypageActivity: AppCompatActivity() {
 
 
     }
-    private fun deleteMember(memberID : String){
+    private fun deleteMember(memberID : String){ // ROOM DB에서 회원을 삭제하는 함수
         Thread{
             memberDao.deleteMember(memberID)
         }.start()
 
     }
-    private fun changePassword(password:String) {
+    private fun changePassword(password:String) { // 비밀번호를 변경하는 함수
         FirebaseAuth.getInstance().currentUser!!.updatePassword(password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
