@@ -26,6 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:gravity="center"
             android:text="회원가입"
             android:textSize="20dp" />
@@ -34,18 +36,22 @@
 
 
     <TextView
-        android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
         android:layout_marginLeft="10dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:text="필수 약관에 동의해주세요." />
 
     <CheckBox
         android:id="@+id/checkAll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
+        android:buttonTint="@color/black"
         android:text="전체 동의합니다." />
 
     <TextView
@@ -53,6 +59,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="20dp"
         android:text="현대식품관" />
 
     <CheckBox
@@ -60,12 +69,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
+        android:buttonTint="@color/black"
         android:text="이용약관(필수)" />
     <CheckBox
         android:id="@+id/checkTerm2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
+        android:buttonTint="@color/black"
         android:text="개인정보 수집·이용 동의 (필수)" />
 
     <CheckBox
@@ -73,14 +84,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:text="개인정보 자동 입력 서비스 동의(선택)" />
+        android:buttonTint="@color/black"
+        android:text="개인정보 자동 입력 서비스 동의 (선택)" />
 
     <CheckBox
         android:id="@+id/checkTerm4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:text="언커먼스토어 서비스 이용을 위한 개인정보 수집·이용 동의(선택)" />
+        android:buttonTint="@color/black"
+        android:text="언커먼스토어 서비스 이용을 위한 개인정보 수집·이용 동의    (선택)" />
 
     <TextView
         android:id="@+id/textView5"
@@ -100,6 +113,7 @@
                 android:id="@+id/untilSecede"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
                 android:layout_marginLeft="15dp"
                 android:text="탈퇴 시까지" />
 
@@ -107,6 +121,7 @@
                 android:id="@+id/year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
                 android:layout_marginLeft="30dp"
                 android:text="1년" />
         </RadioGroup>
@@ -123,6 +138,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:buttonTint="@color/black"
         android:orientation="horizontal">
 
         <CheckBox
@@ -130,6 +146,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
+            android:buttonTint="@color/black"
             android:text="전체" />
 
         <CheckBox
@@ -137,18 +154,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
+            android:buttonTint="@color/black"
             android:text="PUSH" />
         <CheckBox
             android:id="@+id/marketingSMS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
+            android:buttonTint="@color/black"
             android:text="SMS 및 카카오톡" />
         <CheckBox
             android:id="@+id/marketingEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
+            android:buttonTint="@color/black"
             android:text="이메일" />
 
     </LinearLayout>

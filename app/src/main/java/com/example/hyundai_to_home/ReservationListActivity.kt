@@ -41,6 +41,8 @@ class ReservationListActivity: AppCompatActivity(), OnClickListener {
         binding.btnBack.setOnClickListener {
             finish()
         }
+
+        binding.userName.text = memberId
     }
 
     private fun getAllReservationList() {

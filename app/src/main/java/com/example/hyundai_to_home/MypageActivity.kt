@@ -70,14 +70,14 @@ class MypageActivity: AppCompatActivity() {
         binding.delete.setOnClickListener{
             val builder = AlertDialog.Builder(this)
             builder.setTitle("주의!")
-            builder.setMessage("진짜 삭제할거야? 진짜?")
-            builder.setNegativeButton("응") { _: DialogInterface, _: Int ->
+            builder.setMessage("정말로 삭제하시겠습니까?")
+            builder.setNegativeButton("Yes") { _: DialogInterface, _: Int ->
                 MyApplication.auth.currentUser?.delete()
                 deleteMember(MyApplication.email.toString())
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
             }
-            builder.setPositiveButton("아니") { _: DialogInterface, _: Int ->
+            builder.setPositiveButton("NO") { _: DialogInterface, _: Int ->
 
             }
 
@@ -92,13 +92,19 @@ class MypageActivity: AppCompatActivity() {
             alertDialog.setTitle("패스워드 변경")
             alertDialog.setMessage("변경하고 싶은 패스워드를 입력하세요")
             alertDialog.setView(editTextNewPassword)
-            alertDialog.setPositiveButton("변경") { _, _ ->
+            alertDialog.setNegativeButton("변경") { _, _ ->
                 changePassword(
                     editTextNewPassword.text.toString()
                 )
             }
-            alertDialog.setNegativeButton("취소") { dialogInterface, _ -> dialogInterface.dismiss() }
+            alertDialog.setPositiveButton("취소") { dialogInterface, _ -> dialogInterface.dismiss() }
             alertDialog.show()
+        }
+        binding.preview.setOnClickListener{
+            onBackPressed()
+        }
+        binding.preview2.setOnClickListener{
+            onBackPressed()
         }
 
 

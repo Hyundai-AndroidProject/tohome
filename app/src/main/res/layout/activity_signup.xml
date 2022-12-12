@@ -27,6 +27,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
             android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:text="회원가입"
             android:textSize="20dp" />
 
@@ -35,13 +37,23 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:text="가입정보를 입력해주세요." />
 
     <EditText
         android:id="@+id/member_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="15dp"
+        android:paddingLeft="10dp"
 
+        android:background="@drawable/box_white"
         android:hint="이름" />
 
 <LinearLayout
@@ -53,18 +65,24 @@
     <EditText
         android:id="@+id/EmailEditView"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingLeft="10dp"
+        android:background="@drawable/box_white"
+        android:hint="아이디"
         android:inputType="textEmailAddress"
-        android:hint="아이디" />
+         />
 
     <Button
         android:id="@+id/btnDuplicate"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:textSize="12dp"
-        android:text="중복확인" />
+        android:layout_height="50dp"
+        android:layout_marginTop="13dp"
+        android:text="중복확인"
+        android:textSize="12dp" />
 
 
 </LinearLayout>
@@ -73,31 +91,45 @@
         android:id="@+id/checkIDText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
         android:text="현대식품관은 이메일을 아이디로 사용합니다"
         />
     <EditText
         android:id="@+id/PasswordEditView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="15dp"
+        android:paddingLeft="10dp"
+
         android:hint="비밀번호"
+        android:background="@drawable/box_white"
         android:inputType="textPassword"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="15dp"
         android:text="영문,숫자,특수문자를 포함하여 6자 이상 적어주세요."
         />
 
     <EditText
         android:id="@+id/memberPhone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:paddingLeft="10dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/box_white"
         android:hint="전화번호"
-        android:inputType="phone"
-        />
+        android:inputType="phone" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:hint="휴대전화 번호를 입력해주세요."
         />
 
@@ -113,6 +145,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:text="화살표를 눌러 추가정보를 입력해주세요."
             />
 
@@ -120,7 +156,8 @@
             android:id="@+id/options"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="135dp"
             app:srcCompat="@drawable/ic_baseline_arrow_drop_down_24" />
 
     </LinearLayout>
@@ -130,16 +167,28 @@
         android:id="@+id/AddressText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:visibility="gone"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:textStyle="bold"
+
         android:text="주소"
         />
+
     <EditText
         android:id="@+id/memberAddress"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:layout_height="50dp"
         android:hint="기본주소"
-    />
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:background="@drawable/box_white"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingLeft="10dp"/>
+
     <LinearLayout
         android:id="@+id/BirthAndGender"
         android:layout_width="match_parent"
@@ -150,11 +199,17 @@
         <EditText
             android:id="@+id/memberBirth"
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/box_white"
+            android:layout_marginLeft="10dp"
             android:hint="생년월일"
+            android:paddingLeft="10dp"
             />
         <RadioGroup
             android:id="@+id/MemberGender"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -166,6 +221,7 @@
                 android:text="여성"/>
             <RadioButton
                 android:id="@+id/radioMale"
+                android:layout_marginLeft="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="남성"
@@ -177,6 +233,7 @@
         android:id="@+id/BirthText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:visibility="gone"
         android:text="8자리 숫지만 입력 (예.20220101)"
         />
@@ -186,6 +243,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal" >
 
 
@@ -194,12 +252,14 @@
         android:id="@+id/goBackTerms"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="90dp"
         android:text="취소" />
 
         <Button
             android:id="@+id/signBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
             android:text="가입하기" />
     </LinearLayout>
 

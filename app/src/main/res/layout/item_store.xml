@@ -59,7 +59,7 @@
         android:layout_marginTop="6dp"
         android:text="@string/reservation"
         android:background="@drawable/item_background"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/store_image"
         app:layout_constraintStart_toStartOf="@id/store_image"
         />
@@ -72,7 +72,7 @@
         android:layout_marginEnd="10dp"
         android:text="@string/waiting"
         android:background="@drawable/item_background"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="@id/btnReservation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

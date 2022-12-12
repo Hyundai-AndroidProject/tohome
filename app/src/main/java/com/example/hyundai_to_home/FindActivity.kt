@@ -29,24 +29,27 @@ class FindActivity : AppCompatActivity() {
 
 
         binding.btnFindID.setOnClickListener{
-            if(binding.findIdName.text.toString()==""){
+            if(binding.findIdName.text.isEmpty()){
                 Toast.makeText(this,"이름을 입력해주세요.",Toast.LENGTH_SHORT).show()
             }
             else{
-                if (binding.findIdPhone.text.toString() == ""){
+                if (binding.findIdPhone.text.isEmpty()){
                     Toast.makeText(this,"전화번호를 입력해주세요.",Toast.LENGTH_SHORT).show()
                 }
                 else{
                     Thread{
                         val findID : String = memberDao.findId(binding.findIdName.text.toString(),binding.findIdPhone.text.toString())
-                        binding.result.text = findID
+                        runOnUiThread {
+                            binding.result.text = findID
 
-                        if(binding.result.text.toString().equals(findID)){
-                            binding.result.text = "고객님의 아이디는 $findID 입니다."
+                            if(binding.result.text.toString().equals(findID)){
+                                binding.result.text = "고객님의 아이디는 $findID 입니다."
+                            }
+                            else{
+                                binding.result.text = "정보를 정확하게 입력해주세요."
+                            }
                         }
-                        else{
-                            binding.result.text = "정보를 정확하게 입력해주세요."
-                        }
+
                     }.start()
                     }
                 }

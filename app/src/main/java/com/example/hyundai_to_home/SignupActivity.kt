@@ -31,8 +31,9 @@ class SignupActivity : AppCompatActivity() {
         memberDao = db.MemberDao()
 
         binding.btnDuplicate.setOnClickListener {
-            if(binding.EmailEditView.text.toString().equals("")){
+            if(binding.EmailEditView.text.isEmpty()){
                 binding.checkIDText.text = "아이디를 입력해주세요."
+                binding.checkIDText.setTextColor(Color.parseColor("#000000"))
             }
             else{
                 Thread {
@@ -53,6 +54,11 @@ class SignupActivity : AppCompatActivity() {
 
 
 
+        }
+
+        binding.preview.setOnClickListener{
+            val intent = Intent(this, TermsActivity::class.java)
+            startActivity(intent)
         }
 
 

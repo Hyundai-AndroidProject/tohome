@@ -36,6 +36,10 @@ class TermsActivity : AppCompatActivity() {
         binding.marketingSMS.setOnClickListener{onCheckChangedMarketing(binding.marketingSMS)}
         binding.marketingEmail.setOnClickListener{onCheckChangedMarketing(binding.marketingEmail)}
 
+        binding.Preview.setOnClickListener{
+            val intent = Intent(this,LoginActivity::class.java)
+            startActivity(intent)
+        }
         goSignup.setOnClickListener {
             if(binding.checkTerm1.isChecked){
                 if(binding.checkTerm2.isChecked){
