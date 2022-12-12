@@ -131,7 +131,7 @@ class MypageActivity: AppCompatActivity() {
                     MyApplication.auth.signOut()
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
-                } else {
+                } else {// 비밀번호 제약조건 설정
                     Toast.makeText(this, "비밀번호는 6자리 이상으로 적어주세요", Toast.LENGTH_LONG).show()
 
                 }
