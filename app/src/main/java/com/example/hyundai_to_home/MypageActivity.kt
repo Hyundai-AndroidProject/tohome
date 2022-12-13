@@ -43,7 +43,7 @@ class MypageActivity: AppCompatActivity() {
 
 
 
-        Thread{ // 회원정보 출력
+        Thread{ // 회원정보 조회
             val memberInfo : Member = memberDao.getMemberInfo(MyApplication.email.toString())
             runOnUiThread{
                 binding.memberName.text = memberInfo.memberName
@@ -108,6 +108,8 @@ class MypageActivity: AppCompatActivity() {
             alertDialog.setPositiveButton("취소") { dialogInterface, _ -> dialogInterface.dismiss() }
             alertDialog.show()
         }
+
+
         binding.preview.setOnClickListener{ 
             onBackPressed()
         }
@@ -117,12 +119,14 @@ class MypageActivity: AppCompatActivity() {
 
 
     }
+
     private fun deleteMember(memberID : String){ // ROOM DB에서 회원을 삭제하는 함수
         Thread{
             memberDao.deleteMember(memberID)
         }.start()
 
     }
+
     private fun changePassword(password:String) { // 비밀번호를 변경하는 함수
         FirebaseAuth.getInstance().currentUser!!.updatePassword(password)
             .addOnCompleteListener { task ->

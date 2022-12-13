@@ -2,6 +2,7 @@ package com.example.hyundai_to_home
 
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -31,7 +32,10 @@ class FindActivity : AppCompatActivity() {
         db = AppDatabase.getInstance(this)!!
         memberDao = db.MemberDao()
 
-
+        binding.preview.setOnClickListener{
+        val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
 
 
         binding.btnFindID.setOnClickListener{
@@ -45,6 +49,7 @@ class FindActivity : AppCompatActivity() {
                 else{//값이 정확히 입력되었을 때 회원의 아이디를 textview 에 보여준다.
                     Thread{
                         val findID : String = memberDao.findId(binding.findIdName.text.toString(),binding.findIdPhone.text.toString())
+
                         runOnUiThread {
                             binding.result.text = findID
 

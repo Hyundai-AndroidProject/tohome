@@ -17,8 +17,6 @@ import com.example.hyundai_to_home.databinding.ActivityTermsBinding
  */
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityTermsBinding
-
-
 class TermsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -118,7 +118,6 @@ class SignupActivity : AppCompatActivity() {
                 mAddress,
                 mGender
             )
-            println("mName.isBlank(): " + mName.isBlank())
             if(mName.isEmpty()){// 이름을 입력하지 않았을 때
                 Toast.makeText(this,"이름을 입력해주세요",Toast.LENGTH_SHORT).show()
                 println("이름을 입력해주세요")
