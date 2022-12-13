@@ -28,7 +28,6 @@ class ServiceActivity : AppCompatActivity(), View.OnClickListener, NavigationVie
     private lateinit var navigationView : NavigationView
     private  lateinit var  binding : ActivityServiceBinding          // 뷰바인딩 객체
     private var backKeyPressedTime : Long = 0
-    private lateinit var MemberId : String      //임시 회원 아이디
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityServiceBinding.inflate(layoutInflater)     //바인딩 객체 연결
@@ -113,6 +112,8 @@ class ServiceActivity : AppCompatActivity(), View.OnClickListener, NavigationVie
         }
 
         if(System.currentTimeMillis() <= backKeyPressedTime +2500){
+            MyApplication.auth.signOut()
+            MyApplication.email = null
             finishAffinity()
         }
     }
